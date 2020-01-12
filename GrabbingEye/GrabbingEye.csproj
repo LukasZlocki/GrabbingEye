@@ -72,6 +72,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DataSniffer.cs" />
+    <Compile Include="Models\RaportParameters.cs" />
+    <Compile Include="Models\StocksPolishCompany.cs" />
+    <Compile Include="Models\StringTrimmer.cs" />
+    <Compile Include="Models\YearlyFinancialRaportStandard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
