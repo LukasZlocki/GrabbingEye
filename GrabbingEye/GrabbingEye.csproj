@@ -72,6 +72,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelsSql\SqlAdapter.cs" />
     <Compile Include="Models\DataSniffer.cs" />
     <Compile Include="Models\RaportParameters.cs" />
     <Compile Include="Models\StocksPolishCompany.cs" />
