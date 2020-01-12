@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using HtmlAgilityPack;
 
-using SludgeProCreator.Models;
+using GrabbingEye.Models;
 
 
 
 
-namespace SludgeProCreator.Models
+namespace GrabbingEye.Models
 {
     class DataSniffer
     {

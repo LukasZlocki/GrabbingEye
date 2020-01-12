@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 
 using HtmlAgilityPack;
 
-using SludgeProCreator.Models;
-using SludgeProCreator.ModelsSql;
+using GrabbingEye.Models;
+using GrabbingEye.ModelsSql;
 
-namespace SludgeProCreator
+namespace GrabbingEye
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

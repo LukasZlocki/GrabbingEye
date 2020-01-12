@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Data;
 
-using SludgeProCreator.Models;
+using GrabbingEye.Models;
 
-namespace SludgeProCreator.ModelsSql
+namespace GrabbingEye.ModelsSql
 {
     class SqlAdapter
     {
