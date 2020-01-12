@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrabbingEye", "GrabbingEye\GrabbingEye.csproj", "{592E3C49-2C72-4609-BCC2-D403F1B812E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{592E3C49-2C72-4609-BCC2-D403F1B812E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592E3C49-2C72-4609-BCC2-D403F1B812E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592E3C49-2C72-4609-BCC2-D403F1B812E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592E3C49-2C72-4609-BCC2-D403F1B812E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACBCFCE4-FF87-4331-9964-FA6763E4E8EB}
+	EndGlobalSection
+EndGlobal
