@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace GrabbingEye.Models
 {
     class YearlyFinancialRaportStandard
     {
+        [Display (Name="Name")]
         public string Name { get; set; }
         public int Year { get; set; }
         public int PrzychodyNettoZeSprzedazy { get; set; }

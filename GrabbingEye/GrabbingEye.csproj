@@ -39,6 +39,7 @@
       <HintPath>..\packages\HtmlAgilityPack.1.11.17\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,9 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelsSql\SqlAdapter.cs" />
-    <Compile Include="Models\DataSniffer.cs" />
+    <Compile Include="Models\DataSnifferBankier.cs" />
+    <Compile Include="Models\DataSnifferBiznesradar.cs" />
     <Compile Include="Models\RaportParameters.cs" />
     <Compile Include="Models\StocksPolishCompany.cs" />
+    <Compile Include="Models\StringConverter.cs" />
     <Compile Include="Models\StringTrimmer.cs" />
     <Compile Include="Models\YearlyFinancialRaportStandard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

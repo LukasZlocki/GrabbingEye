@@ -13,7 +13,7 @@ using GrabbingEye.Models;
 
 namespace GrabbingEye.Models
 {
-    class DataSniffer
+    class DataSnifferBankier
     {
         static string URL_1 = "https://www.bankier.pl/gielda/notowania/akcje/";
         static string URL_2 = "/wyniki-finansowe/skonsolidowany/roczny/standardowy/";
@@ -32,7 +32,7 @@ namespace GrabbingEye.Models
         /// </summary>
         /// <param name="stockName">Name of stock</param>
         /// <param name="yearRaport">Year of report to find</param>
-        public DataSniffer(string stockName, int yearRaport)
+        public DataSnifferBankier(string stockName, int yearRaport)
         {
             RaportParameters raportParameters = new RaportParameters();
 
@@ -169,7 +169,6 @@ namespace GrabbingEye.Models
                 MessageBox.Show("brak danych");
             }
         }
-
 
         #region GET financial raport
         public YearlyFinancialRaportStandard GetFinancialRaport()

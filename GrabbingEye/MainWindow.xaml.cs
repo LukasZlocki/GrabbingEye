@@ -42,7 +42,7 @@ namespace GrabbingEye
             string _stockName = txtStockName.Text;
             int _raportYear = Convert.ToInt32(txtRaportYear.Text);
 
-            DataSniffer SniffFor = new DataSniffer(_stockName, _raportYear);
+            DataSnifferBankier SniffFor = new DataSnifferBankier(_stockName, _raportYear);
 
             // GET data from web 
             finansialRaport = SniffFor.GetFinancialRaport();
@@ -62,7 +62,7 @@ namespace GrabbingEye
         private void btGetAllCompaniesFromSql_Click(object sender, RoutedEventArgs e)
         {
             SqlAdapter SqlAdapt = new SqlAdapter();
-            SqlAdapt.GetPolishCompanies();
+          // ToDo -->>   SqlAdapt.GetPolishCompanies();
         }
 
         #endregion
