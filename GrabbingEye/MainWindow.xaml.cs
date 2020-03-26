@@ -25,7 +25,7 @@ namespace GrabbingEye
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        YearlyFinancialRaportFull finansialRaportFull = new YearlyFinancialRaportFull();
         YearlyFinancialRaportStandard finansialRaport = new YearlyFinancialRaportStandard();
         StocksPolishCompany stocksPolishCompany = new StocksPolishCompany();
 
@@ -36,18 +36,31 @@ namespace GrabbingEye
 
         #region Buttons
 
-        // GET financial raport basis on _stockName and _raportYear
+        // GET financial raport basis on _stockName and _raportYear and www
         private void btnextract_Click(object sender, RoutedEventArgs e)
         {
             string _stockName = txtStockName.Text;
             int _raportYear = Convert.ToInt32(txtRaportYear.Text);
 
-            DataSnifferBankier SniffFor = new DataSnifferBankier(_stockName, _raportYear);
+            if (RbBankier.IsChecked == true)
+            {
+                DataSnifferBankier SniffFor = new DataSnifferBankier(_stockName, _raportYear);
+                // GET data from web 
+                // Todo : get raport as string ! 
+                finansialRaport = SniffFor.GetFinancialRaport();
+            }
+            else
+            {
+                DataSnifferBiznesradar finansialRaportBiznesradar = new DataSnifferBiznesradar(_stockName, _raportYear);
+                // ToDo : Get raport as string !
+                // ToDo 
 
-            // GET data from web 
-            finansialRaport = SniffFor.GetFinancialRaport();
+            }
 
+            
+            
             // Showing data on screen
+            // Todo : show finacial raport as string not class !
             ShowFinancialRaportOnScreen(finansialRaport);
         }
 
@@ -64,6 +77,20 @@ namespace GrabbingEye
             SqlAdapter SqlAdapt = new SqlAdapter();
           // ToDo -->>   SqlAdapt.GetPolishCompanies();
         }
+
+        #region Radio buttons
+        private void RbBankier_Checked(object sender, RoutedEventArgs e)
+        {
+            RbBankier.IsChecked = true;
+            RbBiznesradar.IsChecked = false;
+        }
+
+        private void RbBiznesradar_Checked(object sender, RoutedEventArgs e)
+        {
+            RbBankier.IsChecked = false;
+            RbBiznesradar.IsChecked = true;
+        }
+        #endregion
 
         #endregion
 
@@ -87,6 +114,7 @@ namespace GrabbingEye
                 "Wartosc ksiegowa na akcje : " + finansialRaport.WartoscKsiegowaNaAkcje + " \n ";
 
         }
+
 
 
 
