@@ -80,6 +80,7 @@
     <Compile Include="Models\StocksPolishCompany.cs" />
     <Compile Include="Models\StringConverter.cs" />
     <Compile Include="Models\StringTrimmer.cs" />
+    <Compile Include="Models\YearlyFinancialRaportFull.cs" />
     <Compile Include="Models\YearlyFinancialRaportStandard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

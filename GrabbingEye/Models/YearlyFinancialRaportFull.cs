@@ -23,7 +23,7 @@ namespace GrabbingEye.Models
             public int AktywaTwale { get; set; }      
             public int AktywaObrotowe { get; set; }
             public int AktywaRazem { get; set; }
-            public int KapitalWlasnyAkcjonariuszyJenostkiDominujacej { get; set; }
+            public int KapitalWlasnyAkcjonariuszyJednostkiDominujacej { get; set; }
             public int ZobowiazanieDlugoterminowe { get; set; }
             public int Zobowiazaniakrotkoterminowe { get; set; }
             public int PasywaRazem { get; set; }
