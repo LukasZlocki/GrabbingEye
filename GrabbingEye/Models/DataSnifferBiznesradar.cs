@@ -9,19 +9,28 @@ namespace GrabbingEye.Models
 {
     class DataSnifferBiznesradar
     {
-        string Url = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
-        string HtmlExtracted = "";
+        private string Url = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
+        private string HtmlExtracted = "";
 
-        private int RaportTablePossition = 0; 
+        private string FullRaportStringFormat = "";
 
+        YearlyFinancialRaportFull FullRaport = new YearlyFinancialRaportFull();
 
         public DataSnifferBiznesradar(string StockName, int RaportByYear)
         {
-            // ToDo : Code to find RaportTablePossition
-            GetTablePossition(Url, RaportByYear, ref RaportTablePossition);
-                // ToDo : Extract Data on RaportTable Possition 
+            int _raportTablePossition = 0;
+
+            GetTablePossition(Url, RaportByYear, ref _raportTablePossition);
+            SniffForRaport(Url, RaportByYear, _raportTablePossition, ref FullRaport );
+            ConvertFinancialRaportToString(FullRaport, ref FullRaportStringFormat);
         }
 
+        /// <summary>
+        /// Checking table possition of raport for given year
+        /// </summary>
+        /// <param name="url">web url</param>
+        /// <param name="raportYear">Year of raport user is looking for</param>
+        /// <param name="raportTablePossition"> ref to count possition of raport in table at web</param>
         private static void GetTablePossition(string url,int raportYear, ref int raportTablePossition)
         {
             HtmlWeb web = new HtmlWeb();
@@ -30,6 +39,7 @@ namespace GrabbingEye.Models
             var extractedData = htmlDoc.DocumentNode.SelectNodes("//th[contains(@class, 'thq h')]");
 
             int i = 0;
+            int _count = 0; 
             raportTablePossition = 0;
 
             string convertedString = "";
@@ -43,7 +53,11 @@ namespace GrabbingEye.Models
                 {
                     i = Convert.ToInt32(convertedString);
                     Console.WriteLine("" + i);
-                    if (raportYear == i) { raportTablePossition = i; }
+                    _count++;
+                    if (raportYear == i) 
+                    { 
+                        raportTablePossition = _count; 
+                    }
                 }
                 catch
                 {
@@ -52,6 +66,19 @@ namespace GrabbingEye.Models
             }
         }
 
+        private static void SniffForRaport(string url, int raportYear, int raportTablePossition, ref YearlyFinancialRaportFull fullRaport)
+        {
+            // ToDo : code sniffing raport here
+        }
+
+        private void ConvertFinancialRaportToString(YearlyFinancialRaportFull financialRaport, ref string finacialRaportAsString)
+        {
+            // ToDo : Code to Convert  Raport to string
+        }
+
+        
+
+        
 
     }
 }

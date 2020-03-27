@@ -44,10 +44,10 @@ namespace GrabbingEye
 
             if (RbBankier.IsChecked == true)
             {
-                DataSnifferBankier SniffFor = new DataSnifferBankier(_stockName, _raportYear);
+                DataSnifferBankier financialRaportBankier = new DataSnifferBankier(_stockName, _raportYear);
                 // GET data from web 
                 // Todo : get raport as string ! 
-                finansialRaport = SniffFor.GetFinancialRaport();
+                finansialRaport = financialRaportBankier.GetFinancialRaport();
             }
             else
             {
