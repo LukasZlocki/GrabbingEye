@@ -19,8 +19,8 @@ namespace GrabbingEye.Models
         public DataSnifferBiznesradar(string StockName, int RaportByYear)
         {
             int _raportTablePossition = 0;
-
-            GetTablePossition(Url, RaportByYear, ref _raportTablePossition);
+            int _raportTableLenght = 0;
+            GetTablePossitionAndLenght(Url, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
             SniffForRaport(Url, RaportByYear, _raportTablePossition, ref FullRaport );
             ConvertFinancialRaportToString(FullRaport, ref FullRaportStringFormat);
         }
@@ -31,7 +31,7 @@ namespace GrabbingEye.Models
         /// <param name="url">web url</param>
         /// <param name="raportYear">Year of raport user is looking for</param>
         /// <param name="raportTablePossition"> ref to count possition of raport in table at web</param>
-        private static void GetTablePossition(string url,int raportYear, ref int raportTablePossition)
+        private static void GetTablePossitionAndLenght(string url,int raportYear, ref int raportTablePossition, ref int raportTableLenght)
         {
             HtmlWeb web = new HtmlWeb();
             var htmlDoc = web.Load(url);
@@ -41,6 +41,7 @@ namespace GrabbingEye.Models
             int i = 0;
             int _count = 0; 
             raportTablePossition = 0;
+            
 
             string convertedString = "";
 
@@ -63,6 +64,7 @@ namespace GrabbingEye.Models
                 {
                     Console.WriteLine("Error !");
                 }
+                raportTableLenght++;
             }
         }
 
