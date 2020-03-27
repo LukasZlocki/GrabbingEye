@@ -17,10 +17,12 @@ namespace GrabbingEye.Models
             public int ZyskZDzialalnosciGospodarczej { get; set; }
             public int ZyskPrzedOpodatkowaniem { get; set; }
             public int ZyskNetto { get; set; }
+            public int ZyskNettoAkcjonariuszyJednostkiDominujacej { get; set; }
+            public int EBITDA { get; set; }
         #endregion
 
         #region Bilans
-            public int AktywaTwale { get; set; }      
+        public int AktywaTwale { get; set; }      
             public int AktywaObrotowe { get; set; }
             public int AktywaRazem { get; set; }
             public int KapitalWlasnyAkcjonariuszyJednostkiDominujacej { get; set; }
