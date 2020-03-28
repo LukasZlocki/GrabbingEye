@@ -27,8 +27,8 @@ namespace GrabbingEye.Models
             public int AktywaRazem { get; set; }
             public int KapitalWlasnyAkcjonariuszyJednostkiDominujacej { get; set; }
             public int UdzialyNiekontrolujace { get; set; }
-            public int ZobowiazanieDlugoterminowe { get; set; }
-            public int Zobowiazaniakrotkoterminowe { get; set; }
+            public int ZobowiazaniaDlugoterminowe { get; set; }
+            public int ZobowiazaniaKrotkoterminowe { get; set; }
             public int PasywaRazem { get; set; }
         #endregion
 
