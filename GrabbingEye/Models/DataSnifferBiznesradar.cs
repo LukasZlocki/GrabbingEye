@@ -9,20 +9,31 @@ namespace GrabbingEye.Models
 {
     class DataSnifferBiznesradar
     {
-        private string Url = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
-        private string HtmlExtracted = "";
+        private static string URL_ZYSKI_STRATY = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
+        private static string URL_BILANS = @"https://www.biznesradar.pl/raporty-finansowe-bilans/WIELTON";
 
-        private string FullRaportStringFormat = "";
 
-        YearlyFinancialRaportFull FullRaport = new YearlyFinancialRaportFull();
+
+        // private string Url = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
+        private string Url = @"https://www.biznesradar.pl/raporty-finansowe-bilans/WIELTON";
+         
+       // YearlyFinancialRaportFull FullRaport = new YearlyFinancialRaportFull();
+        RaportConverter ConvertedRaport;
+
 
         public DataSnifferBiznesradar(string StockName, int RaportByYear)
         {
             int _raportTablePossition = 0;
             int _raportTableLenght = 0;
-            GetTablePossitionAndLenght(Url, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
-            SniffForRaport(Url, RaportByYear, _raportTablePossition, ref FullRaport );
-            ConvertFinancialRaportToString(FullRaport, ref FullRaportStringFormat);
+
+            // list with all yearly finanancial data
+            List<int> _dataList = new List<int>();
+
+            GetTablePossitionAndLenght(URL_ZYSKI_STRATY, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
+
+            SniffForRaport(URL_ZYSKI_STRATY, _raportTablePossition,_raportTableLenght, ref _dataList);
+            SniffForRaport(URL_BILANS, _raportTablePossition, _raportTableLenght, ref _dataList);
+            ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);           
         }
 
         /// <summary>
@@ -68,19 +79,61 @@ namespace GrabbingEye.Models
             }
         }
 
-        private static void SniffForRaport(string url, int raportYear, int raportTablePossition, ref YearlyFinancialRaportFull fullRaport)
+        private static void SniffForRaport(string url, int raportTablePossition, int raportTableLenght, ref List<int> dataList)
         {
-            // ToDo : code sniffing raport here
+            int _loopCounter = 1;
+
+            HtmlWeb web = new HtmlWeb();
+            var htmlDoc = web.Load(url);
+
+            var extractedData = htmlDoc.DocumentNode.SelectNodes("//tr[contains(@class, 'bold')]/td/span");
+
+
+            foreach (var extracted in extractedData)
+            {
+                Console.WriteLine("" + extracted.InnerText);
+
+                // save data when correct year possition in table
+                if (_loopCounter == raportTablePossition)
+                {
+                    string _convertedString = "";
+                    int _dataConverted; 
+
+                    StringConverter stringConvert = new StringConverter();
+                    _convertedString = stringConvert.RepleaceString(extracted.InnerText, " ");
+                    _dataConverted = Convert.ToInt32(_convertedString);
+
+                    dataList.Add(_dataConverted);
+                }
+
+                //reset row counting
+                if (_loopCounter == raportTableLenght)
+                {
+                    _loopCounter = 0;
+                }
+                _loopCounter++;
+            }
         }
 
-        private void ConvertFinancialRaportToString(YearlyFinancialRaportFull financialRaport, ref string finacialRaportAsString)
+
+
+        private void ConvertRaportToClassAndString(List<int> dataList, ref RaportConverter convertedRaport)
         {
-            // ToDo : Code to Convert  Raport to string
+            convertedRaport = new RaportConverter(dataList);
         }
 
         
 
-        
+        // GET - Raport
+        public string GetFullYearlyRaportAsString()
+        {
+            return (this.ConvertedRaport.GetFinancialRaportAsString());
+        }
+
+        public YearlyFinancialRaportFull GetFullYearRaportAsClass()
+        {
+            return (this.ConvertedRaport.GetFinancialRaportAsClass());
+        }
 
     }
 }
