@@ -39,29 +39,23 @@ namespace GrabbingEye
         // GET financial raport basis on _stockName and _raportYear and www
         private void btnextract_Click(object sender, RoutedEventArgs e)
         {
+            string _raportAsString = "";
+
             string _stockName = txtStockName.Text;
             int _raportYear = Convert.ToInt32(txtRaportYear.Text);
 
             if (RbBankier.IsChecked == true)
             {
                 DataSnifferBankier financialRaportBankier = new DataSnifferBankier(_stockName, _raportYear);
-                // GET data from web 
-                // Todo : get raport as string ! 
                 finansialRaport = financialRaportBankier.GetFinancialRaport();
+                // ToDo : send raport as string
             }
             else
             {
                 DataSnifferBiznesradar finansialRaportBiznesradar = new DataSnifferBiznesradar(_stockName, _raportYear);
-                // ToDo : Get raport as string !
-                // ToDo 
-
+                _raportAsString = finansialRaportBiznesradar.GetFullYearlyRaportAsString();
+                ShowFinancialRaportOnScreen(_raportAsString);
             }
-
-            
-            
-            // Showing data on screen
-            // Todo : show finacial raport as string not class !
-            ShowFinancialRaportOnScreen(finansialRaport);
         }
 
         // GET all stock companies at sql database
@@ -95,6 +89,14 @@ namespace GrabbingEye
         #endregion
 
         #region Show Data on screen
+
+        // SHOW - financial raport from string
+        private void ShowFinancialRaportOnScreen(string raport)
+        {
+            txtBox.Text = "" + raport;
+        }
+
+        
         // SHOW - financial Raport
         private void ShowFinancialRaportOnScreen(YearlyFinancialRaportStandard raport)
         {
@@ -115,16 +117,6 @@ namespace GrabbingEye
                 "Wartosc ksiegowa na akcje : " + finansialRaport.WartoscKsiegowaNaAkcje + " \n ";
 
         }
-
-        private void ShowFinancialRaportOnScreen(string raport)
-        {
-            txtBox.Text = "" + raport;
-        }
-
-
-
-
-
 
         #endregion
 
