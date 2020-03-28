@@ -22,7 +22,7 @@ namespace GrabbingEye.Models
         #endregion
 
         #region Bilans
-        public int AktywaTwale { get; set; }      
+        public int AktywaTrwale { get; set; }      
             public int AktywaObrotowe { get; set; }
             public int AktywaRazem { get; set; }
             public int KapitalWlasnyAkcjonariuszyJednostkiDominujacej { get; set; }
