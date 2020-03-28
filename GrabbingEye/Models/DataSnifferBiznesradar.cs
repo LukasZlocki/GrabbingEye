@@ -11,16 +11,10 @@ namespace GrabbingEye.Models
     {
         private static string URL_ZYSKI_STRATY = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
         private static string URL_BILANS = @"https://www.biznesradar.pl/raporty-finansowe-bilans/WIELTON";
-
-
-
-        // private string Url = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
-        private string Url = @"https://www.biznesradar.pl/raporty-finansowe-bilans/WIELTON";
-         
-       // YearlyFinancialRaportFull FullRaport = new YearlyFinancialRaportFull();
+      
         RaportConverter ConvertedRaport;
 
-
+        // Constructor
         public DataSnifferBiznesradar(string StockName, int RaportByYear)
         {
             int _raportTablePossition = 0;
@@ -30,18 +24,18 @@ namespace GrabbingEye.Models
             List<int> _dataList = new List<int>();
 
             GetTablePossitionAndLenght(URL_ZYSKI_STRATY, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
-
             SniffForRaport(URL_ZYSKI_STRATY, _raportTablePossition,_raportTableLenght, ref _dataList);
             SniffForRaport(URL_BILANS, _raportTablePossition, _raportTableLenght, ref _dataList);
             ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);           
         }
 
         /// <summary>
-        /// Checking table possition of raport for given year
+        /// Checking table possition and lenght of raport 
         /// </summary>
         /// <param name="url">web url</param>
         /// <param name="raportYear">Year of raport user is looking for</param>
         /// <param name="raportTablePossition"> ref to count possition of raport in table at web</param>
+        /// <param name="raportTableLenght"> ref to count length of raport in table at web</param>
         private static void GetTablePossitionAndLenght(string url,int raportYear, ref int raportTablePossition, ref int raportTableLenght)
         {
             HtmlWeb web = new HtmlWeb();
@@ -79,6 +73,13 @@ namespace GrabbingEye.Models
             }
         }
 
+        /// <summary>
+        /// Grabing data from web
+        /// </summary>
+        /// <param name="url">web url</param>
+        /// <param name="raportTablePossition">possition in table on web</param>
+        /// <param name="raportTableLenght">lenght of raport</param>
+        /// <param name="dataList">ref to list with grabbed data</param>
         private static void SniffForRaport(string url, int raportTablePossition, int raportTableLenght, ref List<int> dataList)
         {
             int _loopCounter = 1;
@@ -115,14 +116,18 @@ namespace GrabbingEye.Models
             }
         }
 
-
-
+        /// <summary>
+        /// Converting raport to string and class object - see RaportConverter class 
+        /// </summary>
+        /// <param name="dataList">list with grabbed data</param>
+        /// <param name="convertedRaport">ref to class that converts raport to string and class</param>
         private void ConvertRaportToClassAndString(List<int> dataList, ref RaportConverter convertedRaport)
         {
             convertedRaport = new RaportConverter(dataList);
         }
 
-        
+
+        #region GET
 
         // GET - Raport
         public string GetFullYearlyRaportAsString()
@@ -134,6 +139,8 @@ namespace GrabbingEye.Models
         {
             return (this.ConvertedRaport.GetFinancialRaportAsClass());
         }
+
+        #endregion
 
     }
 }
