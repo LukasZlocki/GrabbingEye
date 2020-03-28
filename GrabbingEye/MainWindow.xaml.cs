@@ -98,6 +98,7 @@ namespace GrabbingEye
         // SHOW - financial Raport
         private void ShowFinancialRaportOnScreen(YearlyFinancialRaportStandard raport)
         {
+            
             txtBox.Text =
                 "Nazwa spolki : " + finansialRaport.Name + " \n " +
                 "Rok Raportu : " + finansialRaport.Year + " \n " +
@@ -113,6 +114,11 @@ namespace GrabbingEye
                 "Zysk na akcje : " + finansialRaport.ZyskNaAkcje + " \n " +
                 "Wartosc ksiegowa na akcje : " + finansialRaport.WartoscKsiegowaNaAkcje + " \n ";
 
+        }
+
+        private void ShowFinancialRaportOnScreen(string raport)
+        {
+            txtBox.Text = "" + raport;
         }
 
 
