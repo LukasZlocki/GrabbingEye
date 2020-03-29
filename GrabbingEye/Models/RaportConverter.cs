@@ -39,6 +39,11 @@ namespace GrabbingEye.Models
             financialRaport.ZobowiazaniaDlugoterminowe = dataList[12];
             financialRaport.ZobowiazaniaKrotkoterminowe = dataList[13];
             financialRaport.PasywaRazem = financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.UdzialyNiekontrolujace + financialRaport.ZobowiazaniaDlugoterminowe + financialRaport.ZobowiazaniaKrotkoterminowe;
+            // Cash Flow
+            financialRaport.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
+            financialRaport.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
+            financialRaport.PrzeplywyZDzialalnosciFinansowej = dataList[16];
+            financialRaport.PrzeplywyRazem = financialRaport.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.PrzeplywyZDzialalnosciFinansowej;
         }
 
         private void ConvertToString(YearlyFinancialRaportFull raport, ref string stringRaport)
@@ -52,13 +57,18 @@ namespace GrabbingEye.Models
                 "Zysk przed opodatkowaniem : " + raport.ZyskPrzedOpodatkowaniem + "\n" +
                 "Zysk netto : " + raport.ZyskNetto + "\n" +
                 "EBITDA : " + raport.EBITDA + "\n" +
-                "\n Bilans : \n" +
+                "\nBilans : \n" +
                 "Aktywa razem : " + raport.AktywaRazem + "\n" +
-                "Pasywa razem : " + raport.PasywaRazem + "\n";
+                "Pasywa razem : " + raport.PasywaRazem + "\n" +
+                "\nCash Flow : \n" +
+                "Przeplywy z dzialanosci operacyjnej : " + raport.PrzeplywyZDzialalnosciOperacyjnej + "\n" +
+                "Przeplywy z dzialanosci investycyjnej : " + raport.PrzeplywyZDzialalnosciInvestycyjnej + "\n" +
+                "Przeplywy z dzialanosci finansowej : " + raport.PrzeplywyZDzialalnosciFinansowej + "\n" +
+                "Przeplywy razem : " + raport.PrzeplywyRazem + "\n";
         }
 
         // GET
-        
+
         // GET - raport as class
         public YearlyFinancialRaportFull GetFinancialRaportAsClass()
         {

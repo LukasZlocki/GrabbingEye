@@ -9,9 +9,10 @@ namespace GrabbingEye.Models
 {
     class DataSnifferBiznesradar
     {
-        private static string URL_ZYSKI_STRATY = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/WIELTON";
-        private static string URL_BILANS = @"https://www.biznesradar.pl/raporty-finansowe-bilans/WIELTON";
-      
+        private static string URL_ZYSKI_STRATY = @"https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/";
+        private static string URL_BILANS = @"https://www.biznesradar.pl/raporty-finansowe-bilans/";
+        private static string URL_CASH_FLOW = @"https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/";
+
         RaportConverter ConvertedRaport;
 
         // Constructor
@@ -20,13 +21,17 @@ namespace GrabbingEye.Models
             int _raportTablePossition = 0;
             int _raportTableLenght = 0;
 
+            string _StockName = StockName.ToUpper();
+
+
             // list with all yearly finanancial data
             List<int> _dataList = new List<int>();
 
-            GetTablePossitionAndLenght(URL_ZYSKI_STRATY, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
-            SniffForRaport(URL_ZYSKI_STRATY, _raportTablePossition,_raportTableLenght, ref _dataList);
-            SniffForRaport(URL_BILANS, _raportTablePossition, _raportTableLenght, ref _dataList);
-            ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);           
+            GetTablePossitionAndLenght(URL_ZYSKI_STRATY + "" + _StockName, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
+            SniffForRaport(URL_ZYSKI_STRATY + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+            SniffForRaport(URL_BILANS + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+            SniffForRaport(URL_CASH_FLOW + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+            ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);
         }
 
         /// <summary>
@@ -36,7 +41,7 @@ namespace GrabbingEye.Models
         /// <param name="raportYear">Year of raport user is looking for</param>
         /// <param name="raportTablePossition"> ref to count possition of raport in table at web</param>
         /// <param name="raportTableLenght"> ref to count length of raport in table at web</param>
-        private static void GetTablePossitionAndLenght(string url,int raportYear, ref int raportTablePossition, ref int raportTableLenght)
+        private static void GetTablePossitionAndLenght(string url, int raportYear, ref int raportTablePossition, ref int raportTableLenght)
         {
             HtmlWeb web = new HtmlWeb();
             var htmlDoc = web.Load(url);
@@ -44,9 +49,9 @@ namespace GrabbingEye.Models
             var extractedData = htmlDoc.DocumentNode.SelectNodes("//th[contains(@class, 'thq h')]");
 
             int i = 0;
-            int _count = 0; 
+            int _count = 0;
             raportTablePossition = 0;
-            
+
 
             string convertedString = "";
 
@@ -60,9 +65,9 @@ namespace GrabbingEye.Models
                     i = Convert.ToInt32(convertedString);
                     Console.WriteLine("" + i);
                     _count++;
-                    if (raportYear == i) 
-                    { 
-                        raportTablePossition = _count; 
+                    if (raportYear == i)
+                    {
+                        raportTablePossition = _count;
                     }
                 }
                 catch
@@ -98,7 +103,7 @@ namespace GrabbingEye.Models
                 if (_loopCounter == raportTablePossition)
                 {
                     string _convertedString = "";
-                    int _dataConverted; 
+                    int _dataConverted;
 
                     StringConverter stringConvert = new StringConverter();
                     _convertedString = stringConvert.RepleaceString(extracted.InnerText, " ");
