@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GrabbingEye.Models
 {
@@ -21,29 +23,35 @@ namespace GrabbingEye.Models
 
         private void ConvertToClass(List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
         {
-            // Rachunek zyskow i strat
-            financialRaport.PrzychodyZeSprzedazy = dataList[0];
-            financialRaport.ZyskZeSprzedazy = dataList[1];
-            financialRaport.ZyskOperacyjny = dataList[2];
-            financialRaport.ZyskZDzialalnosciGospodarczej = dataList[3];
-            financialRaport.ZyskPrzedOpodatkowaniem = dataList[4];
-            financialRaport.ZyskNetto = dataList[5];
-            financialRaport.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
-            financialRaport.EBITDA = dataList[7];
-            // Bilans
-            financialRaport.AktywaTrwale = dataList[8];
-            financialRaport.AktywaObrotowe = dataList[9];
-            financialRaport.AktywaRazem = financialRaport.AktywaTrwale + financialRaport.AktywaObrotowe;
-            financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej = dataList[10];
-            financialRaport.UdzialyNiekontrolujace = dataList[11];
-            financialRaport.ZobowiazaniaDlugoterminowe = dataList[12];
-            financialRaport.ZobowiazaniaKrotkoterminowe = dataList[13];
-            financialRaport.PasywaRazem = financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.UdzialyNiekontrolujace + financialRaport.ZobowiazaniaDlugoterminowe + financialRaport.ZobowiazaniaKrotkoterminowe;
-            // Cash Flow
-            financialRaport.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
-            financialRaport.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
-            financialRaport.PrzeplywyZDzialalnosciFinansowej = dataList[16];
-            financialRaport.PrzeplywyRazem = financialRaport.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.PrzeplywyZDzialalnosciFinansowej;
+            if (dataList.Count > 0)
+            {
+                // Rachunek zyskow i strat
+                financialRaport.PrzychodyZeSprzedazy = dataList[0];
+                financialRaport.ZyskZeSprzedazy = dataList[1];
+                financialRaport.ZyskOperacyjny = dataList[2];
+                financialRaport.ZyskZDzialalnosciGospodarczej = dataList[3];
+                financialRaport.ZyskPrzedOpodatkowaniem = dataList[4];
+                financialRaport.ZyskNetto = dataList[5];
+                financialRaport.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
+                financialRaport.EBITDA = dataList[7];
+                // Bilans
+                financialRaport.AktywaTrwale = dataList[8];
+                financialRaport.AktywaObrotowe = dataList[9];
+                financialRaport.AktywaRazem = financialRaport.AktywaTrwale + financialRaport.AktywaObrotowe;
+                financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej = dataList[10];
+                financialRaport.UdzialyNiekontrolujace = dataList[11];
+                financialRaport.ZobowiazaniaDlugoterminowe = dataList[12];
+                financialRaport.ZobowiazaniaKrotkoterminowe = dataList[13];
+                financialRaport.PasywaRazem = financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.UdzialyNiekontrolujace + financialRaport.ZobowiazaniaDlugoterminowe + financialRaport.ZobowiazaniaKrotkoterminowe;
+                // Cash Flow
+                financialRaport.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
+                financialRaport.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
+                financialRaport.PrzeplywyZDzialalnosciFinansowej = dataList[16];
+                financialRaport.PrzeplywyRazem = financialRaport.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.PrzeplywyZDzialalnosciFinansowej;
+            } else
+            {
+                MessageBox.Show("Brak danych");
+            }
         }
 
         private void ConvertToString(YearlyFinancialRaportFull raport, ref string stringRaport)

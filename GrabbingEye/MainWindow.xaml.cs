@@ -53,8 +53,15 @@ namespace GrabbingEye
             else
             {
                 DataSnifferBiznesradar finansialRaportBiznesradar = new DataSnifferBiznesradar(_stockName, _raportYear);
-                _raportAsString = finansialRaportBiznesradar.GetFullYearlyRaportAsString();
-                ShowFinancialRaportOnScreen(_raportAsString);
+                try
+                {
+                    _raportAsString = finansialRaportBiznesradar.GetFullYearlyRaportAsString();
+                    ShowFinancialRaportOnScreen(_raportAsString);
+                }
+                catch
+                {
+                    MessageBox.Show("Brak raportu");
+                }
             }
         }
 

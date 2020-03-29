@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GrabbingEye.Models
 {
@@ -31,7 +32,13 @@ namespace GrabbingEye.Models
             SniffForRaport(URL_ZYSKI_STRATY + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
             SniffForRaport(URL_BILANS + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
             SniffForRaport(URL_CASH_FLOW + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
-            ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);
+            if (_dataList.Count > 0)
+            {
+                ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);
+            } else
+            {
+                MessageBox.Show("Brak danych");
+            }
         }
 
         /// <summary>
@@ -54,27 +61,33 @@ namespace GrabbingEye.Models
 
 
             string convertedString = "";
-
-            foreach (var extracted in extractedData)
+            try
             {
-                StringConverter stringConvert = new StringConverter();
-                convertedString = stringConvert.RepleaceString(extracted.InnerText, "\t");
-                convertedString = stringConvert.RepleaceString(convertedString, "\n");
-                try
+                foreach (var extracted in extractedData)
                 {
-                    i = Convert.ToInt32(convertedString);
-                    Console.WriteLine("" + i);
-                    _count++;
-                    if (raportYear == i)
+                    StringConverter stringConvert = new StringConverter();
+                    convertedString = stringConvert.RepleaceString(extracted.InnerText, "\t");
+                    convertedString = stringConvert.RepleaceString(convertedString, "\n");
+                    try
                     {
-                        raportTablePossition = _count;
+                        i = Convert.ToInt32(convertedString);
+                        Console.WriteLine("" + i);
+                        _count++;
+                        if (raportYear == i)
+                        {
+                            raportTablePossition = _count;
+                        }
                     }
+                    catch
+                    {
+                        Console.WriteLine("Error !");
+                    }
+                    raportTableLenght++;
                 }
-                catch
-                {
-                    Console.WriteLine("Error !");
-                }
-                raportTableLenght++;
+            }
+            catch
+            {
+                MessageBox.Show("Nie ma takiej spolki");
             }
         }
 
@@ -94,30 +107,36 @@ namespace GrabbingEye.Models
 
             var extractedData = htmlDoc.DocumentNode.SelectNodes("//tr[contains(@class, 'bold')]/td/span");
 
-
-            foreach (var extracted in extractedData)
+            try
             {
-                Console.WriteLine("" + extracted.InnerText);
-
-                // save data when correct year possition in table
-                if (_loopCounter == raportTablePossition)
+                foreach (var extracted in extractedData)
                 {
-                    string _convertedString = "";
-                    int _dataConverted;
+                    Console.WriteLine("" + extracted.InnerText);
 
-                    StringConverter stringConvert = new StringConverter();
-                    _convertedString = stringConvert.RepleaceString(extracted.InnerText, " ");
-                    _dataConverted = Convert.ToInt32(_convertedString);
+                    // save data when correct year possition in table
+                    if (_loopCounter == raportTablePossition)
+                    {
+                        string _convertedString = "";
+                        int _dataConverted;
 
-                    dataList.Add(_dataConverted);
+                        StringConverter stringConvert = new StringConverter();
+                        _convertedString = stringConvert.RepleaceString(extracted.InnerText, " ");
+                        _dataConverted = Convert.ToInt32(_convertedString);
+
+                        dataList.Add(_dataConverted);
+                    }
+
+                    //reset row counting
+                    if (_loopCounter == raportTableLenght)
+                    {
+                        _loopCounter = 0;
+                    }
+                    _loopCounter++;
                 }
-
-                //reset row counting
-                if (_loopCounter == raportTableLenght)
-                {
-                    _loopCounter = 0;
-                }
-                _loopCounter++;
+            }
+            catch
+            {
+                MessageBox.Show("Brak danych dla tej spolki");
             }
         }
 
@@ -137,7 +156,7 @@ namespace GrabbingEye.Models
         // GET - Raport
         public string GetFullYearlyRaportAsString()
         {
-            return (this.ConvertedRaport.GetFinancialRaportAsString());
+          return (this.ConvertedRaport.GetFinancialRaportAsString());
         }
 
         public YearlyFinancialRaportFull GetFullYearRaportAsClass()
