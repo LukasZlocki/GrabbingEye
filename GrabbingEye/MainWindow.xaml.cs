@@ -55,7 +55,7 @@ namespace GrabbingEye
                 try
                 {
                     _raportAsString = finansialRaportBiznesradar.GetFullYearlyRaportAsString();
-                    ShowFinancialRaportOnScreen(_raportAsString);
+                    ShowRaportOnScreen(_raportAsString);
                 }
                 catch
                 {
@@ -63,18 +63,12 @@ namespace GrabbingEye
                 }
             }
         }
-
-        // GET all stock companies at sql database
-        private void btServerOn_Click(object sender, RoutedEventArgs e)
-        {
-           // SqlAdapter SqlAdapt = new SqlAdapter();
-        }
-
+    
         // GET all companies from Sql and store them in StockPolishcompany list
         private void btGetAllCompaniesFromSql_Click(object sender, RoutedEventArgs e)
         {
             ModelsSql.SqlAdapter SqlAdapt = new ModelsSql.SqlAdapter();
-          // ToDo -->>   SqlAdapt.GetPolishCompanies();
+            ShowRaportOnScreen(SqlAdapt.GetRaport());
         }
 
         #region Radio buttons
@@ -96,7 +90,7 @@ namespace GrabbingEye
         #region Show Data on screen
 
         // SHOW - financial raport from string
-        private void ShowFinancialRaportOnScreen(string raport)
+        private void ShowRaportOnScreen(string raport)
         {
             txtBox.Text = "" + raport;
         }

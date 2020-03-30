@@ -16,7 +16,6 @@ namespace GrabbingEye.ModelsSql
     {
         #region def of static connection server parameters 
         static string SERVER_CONFIG = "Data Source=DESKTOP-4AAFF58\\SQLEXPRESS;Initial Catalog=PolishStocks;Integrated Security=True";
-        //static string SERVER_CONFIG = "Data Source=DESKTOP-4AAFF58\\SQLEXPRESS;Initial Catalog=OrdersStatus;Integrated Security=True";
         #endregion
 
         List<PolishCompany> ListOfPolishCompanies = new List<PolishCompany>();
@@ -24,12 +23,12 @@ namespace GrabbingEye.ModelsSql
         // constr
         public SqlAdapter()
         {         
-            GetPolishCompanies(ref ListOfPolishCompanies);
+            LoadPolishCompanies(ref ListOfPolishCompanies);
         }
 
 
         // GET all companies (polish stocks)
-        public void GetPolishCompanies(ref List<PolishCompany> listOfPolishCompanies)
+        private void LoadPolishCompanies(ref List<PolishCompany> listOfPolishCompanies)
         {
             // ToDo : code to get data from Sql
             string connectionString = SERVER_CONFIG;
@@ -46,9 +45,7 @@ namespace GrabbingEye.ModelsSql
                 {
                     AddCompanyToList((IDataRecord)reader, ref listOfPolishCompanies);
                 }
-
                 reader.Close();
-
             }
         }
 
@@ -65,6 +62,18 @@ namespace GrabbingEye.ModelsSql
             companyList.Add(company);
 
            // Console.WriteLine(String.Format("{0}, {1}, {2}, {3}, {4}", record[0], record[1], record[2], record[3], record[4]));            
+        }
+
+        // GET - raport
+        public string GetRaport()
+        {
+            string _raport = "";
+            int _quantity = 0;
+
+            _quantity = this.ListOfPolishCompanies.Count;
+            _raport = "Companies loaded : " + _quantity;
+
+            return (_raport);
         }
 
     }
