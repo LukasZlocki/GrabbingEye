@@ -27,7 +27,7 @@ namespace GrabbingEye
     {
         YearlyFinancialRaportFull finansialRaportFull = new YearlyFinancialRaportFull();
         YearlyFinancialRaportStandard finansialRaport = new YearlyFinancialRaportStandard();
-        StocksPolishCompany stocksPolishCompany = new StocksPolishCompany();
+        PolishCompany stocksPolishCompany = new PolishCompany();
 
         public MainWindow()
         {
@@ -48,7 +48,6 @@ namespace GrabbingEye
             {
                 DataSnifferBankier financialRaportBankier = new DataSnifferBankier(_stockName, _raportYear);
                 finansialRaport = financialRaportBankier.GetFinancialRaport();
-                // ToDo : send raport as string
             }
             else
             {
@@ -68,14 +67,13 @@ namespace GrabbingEye
         // GET all stock companies at sql database
         private void btServerOn_Click(object sender, RoutedEventArgs e)
         {
-            // Todo : code connection to server
-            SqlAdapter SqlAdapt = new SqlAdapter();
+           // SqlAdapter SqlAdapt = new SqlAdapter();
         }
 
         // GET all companies from Sql and store them in StockPolishcompany list
         private void btGetAllCompaniesFromSql_Click(object sender, RoutedEventArgs e)
         {
-            SqlAdapter SqlAdapt = new SqlAdapter();
+            ModelsSql.SqlAdapter SqlAdapt = new ModelsSql.SqlAdapter();
           // ToDo -->>   SqlAdapt.GetPolishCompanies();
         }
 
