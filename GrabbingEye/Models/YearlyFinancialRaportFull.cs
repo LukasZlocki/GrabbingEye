@@ -8,10 +8,12 @@ namespace GrabbingEye.Models
 {
     class YearlyFinancialRaportFull
     {
+        public string CompanyName { get; set;}
+        public int RaportYear { get; set; }
 
 
         #region Rachunek zyskow i strat
-            public int PrzychodyZeSprzedazy { get; set; }
+        public int PrzychodyZeSprzedazy { get; set; }
             public int ZyskZeSprzedazy { get; set; }
             public int ZyskOperacyjny { get; set; }       
             public int ZyskZDzialalnosciGospodarczej { get; set; }
