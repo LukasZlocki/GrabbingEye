@@ -14,17 +14,19 @@ namespace GrabbingEye.Models
 
         private string RaportAsString = "";
 
-        public RaportConverter(List<int> RaportList)
+        public RaportConverter(string StockName, int Year, List<int> RaportList)
         {
-            ConvertToClass(RaportList, ref FinancialRaport);
+            ConvertToClass(StockName, Year, RaportList, ref FinancialRaport);
             ConvertToString(FinancialRaport, ref RaportAsString);
         }
 
 
-        private void ConvertToClass(List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
+        private void ConvertToClass(string stockName, int year,  List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
         {
             if (dataList.Count > 0)
             {
+                financialRaport.CompanyName = stockName;
+                financialRaport.RaportYear = year;
                 // Rachunek zyskow i strat
                 financialRaport.PrzychodyZeSprzedazy = dataList[0];
                 financialRaport.ZyskZeSprzedazy = dataList[1];
@@ -56,7 +58,9 @@ namespace GrabbingEye.Models
 
         private void ConvertToString(YearlyFinancialRaportFull raport, ref string stringRaport)
         {
-            stringRaport = "Zyski i straty : \n" +
+            stringRaport = "Firma : " + raport.CompanyName + "\n" +
+                "Raport za rok : " + raport.RaportYear + "\n\n" +
+                "Zyski i straty : \n" +
                 "Przychody ze sprzedazy : " + raport.PrzychodyZeSprzedazy + "\n" +
                 "Zysk ze sprzedazy : " + raport.PrzychodyZeSprzedazy + "\n" +
                 "Zysk ze sprzedazy : " + raport.ZyskZeSprzedazy + "\n" +

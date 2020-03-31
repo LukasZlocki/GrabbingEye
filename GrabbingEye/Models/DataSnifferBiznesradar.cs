@@ -26,15 +26,16 @@ namespace GrabbingEye.Models
 
 
             // list with all yearly finanancial data
-            List<int> _dataList = new List<int>();
+            List<int> _dataList = new List<int>();          
 
             GetTablePossitionAndLenght(URL_ZYSKI_STRATY + "" + _StockName, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
             SniffForRaport(URL_ZYSKI_STRATY + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
             SniffForRaport(URL_BILANS + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
             SniffForRaport(URL_CASH_FLOW + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+           
             if (_dataList.Count > 0)
             {
-                ConvertRaportToClassAndString(_dataList, ref ConvertedRaport);
+                ConvertRaportToClassAndString(StockName, RaportByYear, _dataList, ref ConvertedRaport);
             } else
             {
                 MessageBox.Show("Brak danych");
@@ -145,9 +146,9 @@ namespace GrabbingEye.Models
         /// </summary>
         /// <param name="dataList">list with grabbed data</param>
         /// <param name="convertedRaport">ref to class that converts raport to string and class</param>
-        private void ConvertRaportToClassAndString(List<int> dataList, ref RaportConverter convertedRaport)
+        private void ConvertRaportToClassAndString(string stockName, int raportYear,  List<int> dataList, ref RaportConverter convertedRaport)
         {
-            convertedRaport = new RaportConverter(dataList);
+            convertedRaport = new RaportConverter(stockName, raportYear, dataList);
         }
 
 
