@@ -8,11 +8,14 @@
         Title="Grabbing Eye" Height="450" Width="800">
     <Grid>
         <Button x:Name="btnextract" Content="Exctract" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnextract_Click" Margin="0,13,0,0"/>
-        <Button x:Name="btGetAllComaniesFromSql" Content="Load Sql Companies" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Click="btGetAllCompaniesFromSql_Click" Margin="0,163,0,0"/>
+       
         <TextBox x:Name="txtStockName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Stock name ..." VerticalAlignment="Top" Width="120" Margin="88,0,0,0"/>
         <TextBox x:Name="txtRaportYear" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Raport year ..." VerticalAlignment="Top" Width="120" Margin="88,28,0,0"/>
         <TextBox x:Name="txtBox" HorizontalAlignment="Left" Height="419" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="562" Margin="230,0,0,0"/>
         <RadioButton x:Name="RbBankier" Content="Bankier" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Checked="RbBankier_Checked"/>
         <RadioButton x:Name="RbBiznesradar" Content="Biznesradar" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Checked="RbBiznesradar_Checked"/>
+        <Button x:Name="btGetAllComaniesFromSql" Content="Load Sql Companies" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Click="btGetAllCompaniesFromSql_Click" Margin="0,163,0,0"/>
+        <TextBox x:Name="txtDownloadYear" HorizontalAlignment="Left" Height="23" Margin="0,188,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnGrabData" Content="Grab data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Click="btnGrabData_Click" Margin="0,216,0,0"/>
     </Grid>
 </Window>

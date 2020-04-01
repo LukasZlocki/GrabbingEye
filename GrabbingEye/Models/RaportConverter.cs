@@ -23,36 +23,44 @@ namespace GrabbingEye.Models
 
         private void ConvertToClass(string stockName, int year,  List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
         {
-            if (dataList.Count > 0)
+            try
             {
-                financialRaport.CompanyName = stockName;
-                financialRaport.RaportYear = year;
-                // Rachunek zyskow i strat
-                financialRaport.PrzychodyZeSprzedazy = dataList[0];
-                financialRaport.ZyskZeSprzedazy = dataList[1];
-                financialRaport.ZyskOperacyjny = dataList[2];
-                financialRaport.ZyskZDzialalnosciGospodarczej = dataList[3];
-                financialRaport.ZyskPrzedOpodatkowaniem = dataList[4];
-                financialRaport.ZyskNetto = dataList[5];
-                financialRaport.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
-                financialRaport.EBITDA = dataList[7];
-                // Bilans
-                financialRaport.AktywaTrwale = dataList[8];
-                financialRaport.AktywaObrotowe = dataList[9];
-                financialRaport.AktywaRazem = financialRaport.AktywaTrwale + financialRaport.AktywaObrotowe;
-                financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej = dataList[10];
-                financialRaport.UdzialyNiekontrolujace = dataList[11];
-                financialRaport.ZobowiazaniaDlugoterminowe = dataList[12];
-                financialRaport.ZobowiazaniaKrotkoterminowe = dataList[13];
-                financialRaport.PasywaRazem = financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.UdzialyNiekontrolujace + financialRaport.ZobowiazaniaDlugoterminowe + financialRaport.ZobowiazaniaKrotkoterminowe;
-                // Cash Flow
-                financialRaport.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
-                financialRaport.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
-                financialRaport.PrzeplywyZDzialalnosciFinansowej = dataList[16];
-                financialRaport.PrzeplywyRazem = financialRaport.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.PrzeplywyZDzialalnosciFinansowej;
-            } else
+                if (dataList.Count > 0)
+                {
+                    financialRaport.CompanyName = stockName;
+                    financialRaport.RaportYear = year;
+                    // Rachunek zyskow i strat
+                    financialRaport.PrzychodyZeSprzedazy = dataList[0];
+                    financialRaport.ZyskZeSprzedazy = dataList[1];
+                    financialRaport.ZyskOperacyjny = dataList[2];
+                    financialRaport.ZyskZDzialalnosciGospodarczej = dataList[3];
+                    financialRaport.ZyskPrzedOpodatkowaniem = dataList[4];
+                    financialRaport.ZyskNetto = dataList[5];
+                    financialRaport.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
+                    financialRaport.EBITDA = dataList[7];
+                    // Bilans
+                    financialRaport.AktywaTrwale = dataList[8];
+                    financialRaport.AktywaObrotowe = dataList[9];
+                    financialRaport.AktywaRazem = financialRaport.AktywaTrwale + financialRaport.AktywaObrotowe;
+                    financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej = dataList[10];
+                    financialRaport.UdzialyNiekontrolujace = dataList[11];
+                    financialRaport.ZobowiazaniaDlugoterminowe = dataList[12];
+                    financialRaport.ZobowiazaniaKrotkoterminowe = dataList[13];
+                    financialRaport.PasywaRazem = financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.UdzialyNiekontrolujace + financialRaport.ZobowiazaniaDlugoterminowe + financialRaport.ZobowiazaniaKrotkoterminowe;
+                    // Cash Flow
+                    financialRaport.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
+                    financialRaport.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
+                    financialRaport.PrzeplywyZDzialalnosciFinansowej = dataList[16];
+                    financialRaport.PrzeplywyRazem = financialRaport.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.PrzeplywyZDzialalnosciFinansowej;
+                }
+                else
+                {
+                    MessageBox.Show("Brak danych");
+                }
+            }
+            catch
             {
-                MessageBox.Show("Brak danych");
+                MessageBox.Show(" blad : " + stockName);
             }
         }
 

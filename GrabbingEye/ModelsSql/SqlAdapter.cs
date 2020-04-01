@@ -27,7 +27,7 @@ namespace GrabbingEye.ModelsSql
         }
 
 
-        // GET all companies (polish stocks)
+        // load all companies (polish stocks)
         private void LoadPolishCompanies(ref List<PolishCompany> listOfPolishCompanies)
         {
             // ToDo : code to get data from Sql
@@ -74,6 +74,11 @@ namespace GrabbingEye.ModelsSql
             _raport = "Companies loaded : " + _quantity;
 
             return (_raport);
+        }
+
+        public List<PolishCompany> GetListOfCompanies()
+        {
+            return (this.ListOfPolishCompanies);
         }
 
     }
