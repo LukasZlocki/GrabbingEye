@@ -17,6 +17,7 @@ using HtmlAgilityPack;
 
 using GrabbingEye.Models;
 using GrabbingEye.ModelsSql;
+using System.Threading;
 
 namespace GrabbingEye
 {
@@ -96,6 +97,7 @@ namespace GrabbingEye
                     DataSnifferBiznesradar sniff = new DataSnifferBiznesradar(listOfPolishCompanies[i].Name, year);
                     listOfYearlyFinancialRaports.Add(sniff.GetFullYearRaportAsClass());
                     _counterOK++;
+                    Thread.Sleep(3000);
                 } else
                 {
                     // Do nothing
@@ -142,7 +144,28 @@ namespace GrabbingEye
                 case "INGBSK":
                     _isready = false;
                     break;
+                case "MILLENNIUM":
+                    _isready = false;
+                    break;
+                case "BOS":
+                    _isready = false;
+                    break;
+                case "IDEABANK":
+                    _isready = false;
+                    break;
                 case "COMARCH":
+                    _isready = false;
+                    break;
+                case "LIVECHAT":
+                    _isready = false;
+                    break;
+                case "ALUMETAL":
+                    _isready = false;
+                    break;
+                case "PBKM":
+                    _isready = false;
+                    break;
+                case "R22":
                     _isready = false;
                     break;
             }
