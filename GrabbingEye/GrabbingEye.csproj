@@ -75,8 +75,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelsSql\SqlAdapter.cs" />
+    <Compile Include="Models\Balance.cs" />
+    <Compile Include="Models\CashFlow.cs" />
     <Compile Include="Models\DataSnifferBankier.cs" />
     <Compile Include="Models\DataSnifferBiznesradar.cs" />
+    <Compile Include="Models\FinancialRaport.cs" />
+    <Compile Include="Models\IFinancialRaport.cs" />
+    <Compile Include="Models\ProfitAndLose.cs" />
     <Compile Include="Models\RaportConverter.cs" />
     <Compile Include="Models\RaportParameters.cs" />
     <Compile Include="Models\PolishCompany.cs" />
