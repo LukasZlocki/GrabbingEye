@@ -9,11 +9,11 @@ namespace GrabbingEye.Models
     class FinancialRaport : IFinancialRaport
     {
         public string ComapanyName { get; set; }
-        public string RaportYear { get; set; }
+        public int RaportYear { get; set; }
 
-        ProfitAndLose ProfitAndLose = new ProfitAndLose();
-        Balance Balance = new Balance();
-        CashFlow CashFlow = new CashFlow();
+        public ProfitAndLose ProfitAndLose = new ProfitAndLose();
+        public Balance Balance = new Balance();
+        public CashFlow CashFlow = new CashFlow();
 
 
         #region SET - raport

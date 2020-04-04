@@ -10,7 +10,7 @@ namespace GrabbingEye.Models
 {
     class RaportConverter
     {
-        YearlyFinancialRaportFull FinancialRaport = new YearlyFinancialRaportFull();
+        FinancialRaport FinancialRaport = new FinancialRaport();
 
         private string RaportAsString = "";
 
@@ -21,37 +21,38 @@ namespace GrabbingEye.Models
         }
 
 
-        private void ConvertToClass(string stockName, int year,  List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
+        //   private void ConvertToClass(string stockName, int year,  List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
+        private void ConvertToClass(string stockName, int year, List<int> dataList, ref FinancialRaport financialRaport)
         {
             try
             {
                 if (dataList.Count > 0)
                 {
-                    financialRaport.CompanyName = stockName;
+                    financialRaport.ComapanyName = stockName;
                     financialRaport.RaportYear = year;
                     // Rachunek zyskow i strat
-                    financialRaport.PrzychodyZeSprzedazy = dataList[0];
-                    financialRaport.ZyskZeSprzedazy = dataList[1];
-                    financialRaport.ZyskOperacyjny = dataList[2];
-                    financialRaport.ZyskZDzialalnosciGospodarczej = dataList[3];
-                    financialRaport.ZyskPrzedOpodatkowaniem = dataList[4];
-                    financialRaport.ZyskNetto = dataList[5];
-                    financialRaport.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
-                    financialRaport.EBITDA = dataList[7];
+                    financialRaport.ProfitAndLose.PrzychodyZeSprzedazy = dataList[0];
+                    financialRaport.ProfitAndLose.ZyskZeSprzedazy = dataList[1];
+                    financialRaport.ProfitAndLose.ZyskOperacyjny = dataList[2];
+                    financialRaport.ProfitAndLose.ZyskZDzialalnosciGospodarczej = dataList[3];
+                    financialRaport.ProfitAndLose.ZyskPrzedOpodatkowaniem = dataList[4];
+                    financialRaport.ProfitAndLose.ZyskNetto = dataList[5];
+                    financialRaport.ProfitAndLose.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
+                    financialRaport.ProfitAndLose.EBITDA = dataList[7];
                     // Bilans
-                    financialRaport.AktywaTrwale = dataList[8];
-                    financialRaport.AktywaObrotowe = dataList[9];
-                    financialRaport.AktywaRazem = financialRaport.AktywaTrwale + financialRaport.AktywaObrotowe;
-                    financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej = dataList[10];
-                    financialRaport.UdzialyNiekontrolujace = dataList[11];
-                    financialRaport.ZobowiazaniaDlugoterminowe = dataList[12];
-                    financialRaport.ZobowiazaniaKrotkoterminowe = dataList[13];
-                    financialRaport.PasywaRazem = financialRaport.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.UdzialyNiekontrolujace + financialRaport.ZobowiazaniaDlugoterminowe + financialRaport.ZobowiazaniaKrotkoterminowe;
+                    financialRaport.Balance.AktywaTrwale = dataList[8];
+                    financialRaport.Balance.AktywaObrotowe = dataList[9];
+                    financialRaport.Balance.AktywaRazem = financialRaport.Balance.AktywaTrwale + financialRaport.Balance.AktywaObrotowe;
+                    financialRaport.Balance.KapitalWlasnyAkcjonariuszyJednostkiDominujacej = dataList[10];
+                    financialRaport.Balance.UdzialyNiekontrolujace = dataList[11];
+                    financialRaport.Balance.ZobowiazaniaDlugoterminowe = dataList[12];
+                    financialRaport.Balance.ZobowiazaniaKrotkoterminowe = dataList[13];
+                    financialRaport.Balance.PasywaRazem = financialRaport.Balance.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.Balance.UdzialyNiekontrolujace + financialRaport.Balance.ZobowiazaniaDlugoterminowe + financialRaport.Balance.ZobowiazaniaKrotkoterminowe;
                     // Cash Flow
-                    financialRaport.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
-                    financialRaport.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
-                    financialRaport.PrzeplywyZDzialalnosciFinansowej = dataList[16];
-                    financialRaport.PrzeplywyRazem = financialRaport.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.PrzeplywyZDzialalnosciFinansowej;
+                    financialRaport.CashFlow.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
+                    financialRaport.CashFlow.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
+                    financialRaport.CashFlow.PrzeplywyZDzialalnosciFinansowej = dataList[16];
+                    financialRaport.CashFlow.PrzeplywyRazem = financialRaport.CashFlow.PrzeplywyZDzialalnosciOperacyjnej + financialRaport.CashFlow.PrzeplywyZDzialalnosciInvestycyjnej + financialRaport.CashFlow.PrzeplywyZDzialalnosciFinansowej;
                 }
                 else
                 {
@@ -64,33 +65,33 @@ namespace GrabbingEye.Models
             }
         }
 
-        private void ConvertToString(YearlyFinancialRaportFull raport, ref string stringRaport)
+        private void ConvertToString(FinancialRaport raport, ref string stringRaport)
         {
-            stringRaport = "Firma : " + raport.CompanyName + "\n" +
+            stringRaport = "Firma : " + raport.ComapanyName + "\n" +
                 "Raport za rok : " + raport.RaportYear + "\n\n" +
                 "Zyski i straty : \n" +
-                "Przychody ze sprzedazy : " + raport.PrzychodyZeSprzedazy + "\n" +
-                "Zysk ze sprzedazy : " + raport.PrzychodyZeSprzedazy + "\n" +
-                "Zysk ze sprzedazy : " + raport.ZyskZeSprzedazy + "\n" +
-                "Zysk operacyjny EBIT : " + raport.ZyskOperacyjny + "\n" +
-                "Zysk z dzialalnosci gospodarczej : " + raport.ZyskZDzialalnosciGospodarczej + "\n" +
-                "Zysk przed opodatkowaniem : " + raport.ZyskPrzedOpodatkowaniem + "\n" +
-                "Zysk netto : " + raport.ZyskNetto + "\n" +
-                "EBITDA : " + raport.EBITDA + "\n" +
+                "Przychody ze sprzedazy : " + raport.ProfitAndLose.PrzychodyZeSprzedazy + "\n" +
+                "Zysk ze sprzedazy : " + raport.ProfitAndLose.PrzychodyZeSprzedazy + "\n" +
+                "Zysk ze sprzedazy : " + raport.ProfitAndLose.ZyskZeSprzedazy + "\n" +
+                "Zysk operacyjny EBIT : " + raport.ProfitAndLose.ZyskOperacyjny + "\n" +
+                "Zysk z dzialalnosci gospodarczej : " + raport.ProfitAndLose.ZyskZDzialalnosciGospodarczej + "\n" +
+                "Zysk przed opodatkowaniem : " + raport.ProfitAndLose.ZyskPrzedOpodatkowaniem + "\n" +
+                "Zysk netto : " + raport.ProfitAndLose.ZyskNetto + "\n" +
+                "EBITDA : " + raport.ProfitAndLose.EBITDA + "\n" +
                 "\nBilans : \n" +
-                "Aktywa razem : " + raport.AktywaRazem + "\n" +
-                "Pasywa razem : " + raport.PasywaRazem + "\n" +
+                "Aktywa razem : " + raport.Balance.AktywaRazem + "\n" +
+                "Pasywa razem : " + raport.Balance.PasywaRazem + "\n" +
                 "\nCash Flow : \n" +
-                "Przeplywy z dzialanosci operacyjnej : " + raport.PrzeplywyZDzialalnosciOperacyjnej + "\n" +
-                "Przeplywy z dzialanosci investycyjnej : " + raport.PrzeplywyZDzialalnosciInvestycyjnej + "\n" +
-                "Przeplywy z dzialanosci finansowej : " + raport.PrzeplywyZDzialalnosciFinansowej + "\n" +
-                "Przeplywy razem : " + raport.PrzeplywyRazem + "\n";
+                "Przeplywy z dzialanosci operacyjnej : " + raport.CashFlow.PrzeplywyZDzialalnosciOperacyjnej + "\n" +
+                "Przeplywy z dzialanosci investycyjnej : " + raport.CashFlow.PrzeplywyZDzialalnosciInvestycyjnej + "\n" +
+                "Przeplywy z dzialanosci finansowej : " + raport.CashFlow.PrzeplywyZDzialalnosciFinansowej + "\n" +
+                "Przeplywy razem : " + raport.CashFlow.PrzeplywyRazem + "\n";
         }
 
         // GET
 
         // GET - raport as class
-        public YearlyFinancialRaportFull GetFinancialRaportAsClass()
+        public FinancialRaport GetFinancialRaportAsClass()
         {
             return this.FinancialRaport;
         }

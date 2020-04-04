@@ -160,7 +160,7 @@ namespace GrabbingEye.Models
           return (this.ConvertedRaport.GetFinancialRaportAsString());
         }
 
-        public YearlyFinancialRaportFull GetFullYearRaportAsClass()
+        public FinancialRaport GetFullYearRaportAsClass()
         {
             return (this.ConvertedRaport.GetFinancialRaportAsClass());
         }

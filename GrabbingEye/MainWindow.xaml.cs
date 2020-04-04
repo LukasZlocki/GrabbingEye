@@ -26,12 +26,11 @@ namespace GrabbingEye
     /// </summary>
     public partial class MainWindow : Window
     {
-        YearlyFinancialRaportFull finansialRaportFull = new YearlyFinancialRaportFull();
         YearlyFinancialRaportStandard finansialRaport = new YearlyFinancialRaportStandard();
         PolishCompany stocksPolishCompany = new PolishCompany();
 
         List<PolishCompany> ListOfPolishCompanies = new List<PolishCompany>();
-        List<YearlyFinancialRaportFull> ListOfYearlyRaports = new List<YearlyFinancialRaportFull>();
+        List<FinancialRaport> ListOfYearlyRaports = new List<FinancialRaport>();
 
         public MainWindow()
         {
@@ -85,7 +84,7 @@ namespace GrabbingEye
 
         #region Massive Grabbing
 
-        private void MassiveDataGrabing(List<PolishCompany> listOfPolishCompanies, ref List<YearlyFinancialRaportFull> listOfYearlyFinancialRaports, int year)
+        private void MassiveDataGrabing(List<PolishCompany> listOfPolishCompanies, ref List<FinancialRaport> listOfYearlyFinancialRaports, int year)
         {
             int _counterOK = 0;
             int _counterALL = 0;
