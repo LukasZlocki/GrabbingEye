@@ -1,23 +1,8 @@
-﻿using System;
+﻿using GrabbingEye.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using HtmlAgilityPack;
-
-using GrabbingEye.Models;
-using GrabbingEye.ModelsSql;
 using System.Threading;
+using System.Windows;
 
 namespace GrabbingEye
 {
@@ -26,9 +11,6 @@ namespace GrabbingEye
     /// </summary>
     public partial class MainWindow : Window
     {
-        YearlyFinancialRaportStandard finansialRaport = new YearlyFinancialRaportStandard();
-        PolishCompany stocksPolishCompany = new PolishCompany();
-
         List<PolishCompany> ListOfPolishCompanies = new List<PolishCompany>();
         List<FinancialRaport> ListOfYearlyRaports = new List<FinancialRaport>();
 
@@ -47,24 +29,17 @@ namespace GrabbingEye
             string _stockName = txtStockName.Text;
             int _raportYear = Convert.ToInt32(txtRaportYear.Text);
 
-            if (RbBankier.IsChecked == true)
+            DataSnifferBiznesradar finansialRaportBiznesradar = new DataSnifferBiznesradar(_stockName, _raportYear);
+            try
             {
-                DataSnifferBankier financialRaportBankier = new DataSnifferBankier(_stockName, _raportYear);
-                finansialRaport = financialRaportBankier.GetFinancialRaport();
+                _raportAsString = finansialRaportBiznesradar.GetFullYearlyRaportAsString();
+                ShowRaportOnScreen(_raportAsString);
             }
-            else
+            catch
             {
-                DataSnifferBiznesradar finansialRaportBiznesradar = new DataSnifferBiznesradar(_stockName, _raportYear);
-                try
-                {
-                    _raportAsString = finansialRaportBiznesradar.GetFullYearlyRaportAsString();
-                    ShowRaportOnScreen(_raportAsString);
-                }
-                catch
-                {
-                    MessageBox.Show("Brak raportu");
-                }
+                MessageBox.Show("Brak raportu");
             }
+
         }
 
         // GET all companies from Sql and store them in StockPolishcompany list
@@ -92,18 +67,20 @@ namespace GrabbingEye
             // ToDo : code loops to gather data
             for (int i = 0; i < listOfPolishCompanies.Count; i++)
             {
-                if (isGrabberReady(listOfPolishCompanies[i].Name)) {
+                if (isGrabberReady(listOfPolishCompanies[i].Name))
+                {
                     DataSnifferBiznesradar sniff = new DataSnifferBiznesradar(listOfPolishCompanies[i].Name, year);
                     listOfYearlyFinancialRaports.Add(sniff.GetFullYearRaportAsClass());
                     _counterOK++;
                     Thread.Sleep(3000);
-                } else
+                }
+                else
                 {
                     // Do nothing
                 }
                 _counterALL++;
             }
-            ShowRaportOnScreen("ALL : " + _counterALL + ", OK : " + _counterOK );
+            ShowRaportOnScreen("ALL : " + _counterALL + ", OK : " + _counterOK);
         }
 
         /// <summary>
@@ -173,20 +150,13 @@ namespace GrabbingEye
 
         #endregion
 
-        #region Radio buttons
-        private void RbBankier_Checked(object sender, RoutedEventArgs e)
-        {
-            RbBankier.IsChecked = true;
-            RbBiznesradar.IsChecked = false;
-        }
-
-        private void RbBiznesradar_Checked(object sender, RoutedEventArgs e)
-        {
-            RbBankier.IsChecked = false;
-            RbBiznesradar.IsChecked = true;
-        }
         #endregion
 
+        #region Radio buttons
+        private void RbBiznesradar_Checked(object sender, RoutedEventArgs e)
+        {
+            RbBiznesradar.IsChecked = true;
+        }
         #endregion
 
         #region Show Data on screen
@@ -196,30 +166,7 @@ namespace GrabbingEye
         {
             txtBox.Text = "" + raport;
         }
-
-
-        // SHOW - financial Raport
-        private void ShowFinancialRaportOnScreen(YearlyFinancialRaportStandard raport)
-        {
-
-            txtBox.Text =
-                "Nazwa spolki : " + finansialRaport.Name + " \n " +
-                "Rok Raportu : " + finansialRaport.Year + " \n " +
-                "Przychody netto ze sprzedazy : " + finansialRaport.PrzychodyNettoZeSprzedazy + " \n " +
-                "Zyski z dzialalnosci operacyjnej : " + finansialRaport.ZyskDzialalnosciOperacyjnej + " \n " +
-                "Zysk brutto : " + finansialRaport.ZyskBrutto + " \n " +
-                "Zysk netto : " + finansialRaport.ZyskNetto + " \n " +
-                "Amortyzacja : " + finansialRaport.Amortyzacja + " \n " +
-                "Ebitda : " + finansialRaport.Ebitda + " \n " +
-                "Aktywa : " + finansialRaport.Aktywa + " \n " +
-                "Kapital wlasny : " + finansialRaport.KapitalWlasny + " \n " +
-                "Liczba Akcji : " + finansialRaport.LiczbaAkcji + " \n " +
-                "Zysk na akcje : " + finansialRaport.ZyskNaAkcje + " \n " +
-                "Wartosc ksiegowa na akcje : " + finansialRaport.WartoscKsiegowaNaAkcje + " \n ";
-
-        }
-
-
+     
         #endregion
 
 
