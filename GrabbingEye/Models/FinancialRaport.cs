@@ -2,8 +2,8 @@
 {
     class FinancialRaport : IFinancialRaport
     {
-        public string ComapanyName { get; set; }
         public int Id { get; set; }
+        public string ComapanyName { get; set; }
         public int RaportYear { get; set; }
 
         public ProfitAndLose ProfitAndLose = new ProfitAndLose();
