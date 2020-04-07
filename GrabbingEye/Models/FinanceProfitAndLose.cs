@@ -1,6 +1,6 @@
 ﻿namespace GrabbingEye.Models
 {
-    class ProfitAndLose
+    class FinanceProfitAndLose
     {
         #region Rachunek zyskow i strat
         public int PrzychodyZeSprzedazy { get; set; }

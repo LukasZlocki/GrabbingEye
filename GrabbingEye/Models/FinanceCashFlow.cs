@@ -1,6 +1,6 @@
 ﻿namespace GrabbingEye.Models
 {
-    class CashFlow
+    class FinanceCashFlow
     {
         #region Cash Flow
         public int PrzeplywyZDzialalnosciOperacyjnej { get; set; }

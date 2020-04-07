@@ -3,13 +3,13 @@
     interface IFinancialRaport
     {
         // SET - raport
-        void SetProfitAndLoseRaport(ProfitAndLose ProfitAndLose);
-        void SetBalanceRaport(Balance balance);
-        void SetCashFlowRaport(CashFlow cashFlow);
+        void SetProfitAndLoseRaport(FinanceProfitAndLose ProfitAndLose);
+        void SetBalanceRaport(FinanceBalance balance);
+        void SetCashFlowRaport(FinanceCashFlow cashFlow);
 
        // GET - raport
-       ProfitAndLose GetProfitAndLoseRaport();
-       Balance GetBalanceRaport();
-       CashFlow GetCashFlowRaport();
+       FinanceProfitAndLose GetProfitAndLoseRaport();
+       FinanceBalance GetBalanceRaport();
+       FinanceCashFlow GetCashFlowRaport();
     }
 }

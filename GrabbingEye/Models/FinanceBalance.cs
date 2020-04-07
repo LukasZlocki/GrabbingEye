@@ -1,6 +1,6 @@
 ﻿namespace GrabbingEye.Models
 {
-    class Balance
+    class FinanceBalance
     {
         #region Bilans
         public int AktywaTrwale { get; set; }

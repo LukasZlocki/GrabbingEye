@@ -6,23 +6,23 @@
         public string ComapanyName { get; set; }
         public int RaportYear { get; set; }
 
-        public ProfitAndLose ProfitAndLose = new ProfitAndLose();
-        public Balance Balance = new Balance();
-        public CashFlow CashFlow = new CashFlow();
+        public FinanceProfitAndLose ProfitAndLose = new FinanceProfitAndLose();
+        public FinanceBalance Balance = new FinanceBalance();
+        public FinanceCashFlow CashFlow = new FinanceCashFlow();
 
 
         #region SET - raport
-        public void SetProfitAndLoseRaport(ProfitAndLose profitAndLose)
+        public void SetProfitAndLoseRaport(FinanceProfitAndLose profitAndLose)
         {
             ProfitAndLose = profitAndLose;
         }
 
-        public void SetBalanceRaport(Balance balance)
+        public void SetBalanceRaport(FinanceBalance balance)
         {
             Balance = balance;
         }
 
-        public void SetCashFlowRaport(CashFlow cashFlow)
+        public void SetCashFlowRaport(FinanceCashFlow cashFlow)
         {
             CashFlow = cashFlow;
         }
@@ -32,17 +32,17 @@
         #region GET - raport
         // GET - raport
 
-        public ProfitAndLose GetProfitAndLoseRaport()
+        public FinanceProfitAndLose GetProfitAndLoseRaport()
         {
             return (ProfitAndLose);
         }
 
-        public Balance GetBalanceRaport()
+        public FinanceBalance GetBalanceRaport()
         {
             return (Balance);
         }
 
-        public CashFlow GetCashFlowRaport()
+        public FinanceCashFlow GetCashFlowRaport()
         {
             return (CashFlow);
         }
