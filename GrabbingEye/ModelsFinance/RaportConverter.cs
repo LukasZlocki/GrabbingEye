@@ -23,7 +23,7 @@ namespace GrabbingEye.Models
             {
                 if (dataList.Count > 0)
                 {
-                    financialRaport.Id = id;
+                   // financialRaport.Id = id;
                     financialRaport.ComapanyName = stockName;
                     financialRaport.RaportYear = year;
                     // Rachunek zyskow i strat

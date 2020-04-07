@@ -74,17 +74,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelsSql\ISqlRaportAdapter.cs" />
     <Compile Include="ModelsSql\SqlAdapter.cs" />
-    <Compile Include="Models\FinanceBalance.cs" />
-    <Compile Include="Models\FinanceCashFlow.cs" />
-    <Compile Include="Models\DataSnifferBiznesradar.cs" />
-    <Compile Include="Models\FinancialRaport.cs" />
-    <Compile Include="Models\IFinancialRaport.cs" />
-    <Compile Include="Models\FinanceProfitAndLose.cs" />
-    <Compile Include="Models\RaportConverter.cs" />
-    <Compile Include="Models\PolishCompany.cs" />
-    <Compile Include="Models\StringConverter.cs" />
-    <Compile Include="Models\StringTrimmer.cs" />
+    <Compile Include="ModelsSql\SqlAdapterFinanceBalance.cs" />
+    <Compile Include="ModelsFinance\FinanceBalance.cs" />
+    <Compile Include="ModelsFinance\FinanceCashFlow.cs" />
+    <Compile Include="ModelsFinance\DataSnifferBiznesradar.cs" />
+    <Compile Include="ModelsFinance\FinancialRaport.cs" />
+    <Compile Include="ModelsFinance\IFinancialRaport.cs" />
+    <Compile Include="ModelsFinance\FinanceProfitAndLose.cs" />
+    <Compile Include="ModelsFinance\RaportConverter.cs" />
+    <Compile Include="ModelsFinance\PolishCompany.cs" />
+    <Compile Include="ModelsFinance\StringConverter.cs" />
+    <Compile Include="ModelsFinance\StringTrimmer.cs" />
+    <Compile Include="ModelsSql\SqlAdapterFinanceCashFlow.cs" />
+    <Compile Include="ModelsSql\SqlAdapterFinanceProfitAndLose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
