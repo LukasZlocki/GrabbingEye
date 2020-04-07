@@ -15,7 +15,7 @@ namespace GrabbingEye.ModelsSql
         #endregion
 
         // PUSH - financial balance data on server
-        public void PushFinanceCashFlowRaport(List<FinanceCashFlow> CashFlowRaportList)
+        public void PushFinanceCashFlowRaport(List<FinancialRaport> RaportList)
         {
             // code pushing data here
             using (SqlConnection connection = new SqlConnection(SERVER_CONFIG))
@@ -25,16 +25,16 @@ namespace GrabbingEye.ModelsSql
                     + "VALUES "
                     + "(@CompanyName, @RaportYear, @PrzeplywyZDzialalnosciOperacyjnej, @PrzeplywyZDzialalnosciInvestycyjnej, @PrzeplywyZDzialalnosciFinansowej, @PrzeplywyRazem)";
 
-                for (int i = 0; i < CashFlowRaportList.Count; i++)
+                for (int i = 0; i < RaportList.Count; i++)
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@CompanyName", CashFlowRaportList[i].ComapanyName);
-                        command.Parameters.AddWithValue("@RaportYear", CashFlowRaportList[i].RaportYear);
-                        command.Parameters.AddWithValue("@PrzeplywyZDzialalnosciOperacyjnej", CashFlowRaportList[i].PrzeplywyZDzialalnosciOperacyjnej);
-                        command.Parameters.AddWithValue("@PrzeplywyZDzialalnosciInvestycyjnej", CashFlowRaportList[i].PrzeplywyZDzialalnosciInvestycyjnej);
-                        command.Parameters.AddWithValue("@PrzeplywyZDzialalnosciFinansowej", CashFlowRaportList[i].PrzeplywyZDzialalnosciFinansowej);
-                        command.Parameters.AddWithValue("@PrzeplywyRazem", CashFlowRaportList[i].PrzeplywyRazem);
+                        command.Parameters.AddWithValue("@CompanyName", RaportList[i].CashFlow.ComapanyName);
+                        command.Parameters.AddWithValue("@RaportYear", RaportList[i].CashFlow.RaportYear);
+                        command.Parameters.AddWithValue("@PrzeplywyZDzialalnosciOperacyjnej", RaportList[i].CashFlow.PrzeplywyZDzialalnosciOperacyjnej);
+                        command.Parameters.AddWithValue("@PrzeplywyZDzialalnosciInvestycyjnej", RaportList[i].CashFlow.PrzeplywyZDzialalnosciInvestycyjnej);
+                        command.Parameters.AddWithValue("@PrzeplywyZDzialalnosciFinansowej", RaportList[i].CashFlow.PrzeplywyZDzialalnosciFinansowej);
+                        command.Parameters.AddWithValue("@PrzeplywyRazem", RaportList[i].CashFlow.PrzeplywyRazem);
 
                         connection.Open();
 

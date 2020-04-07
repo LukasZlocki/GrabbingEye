@@ -15,7 +15,7 @@ namespace GrabbingEye.ModelsSql
         #endregion
 
         // PUSH - financial balance data on server
-        public void PushFinanceBalanceRaport(List<FinanceBalance> BalanceRaportList)
+        public void PushFinanceBalanceRaport(List<FinancialRaport> RaportList)
         {
             // code pushing data here
             using (SqlConnection connection = new SqlConnection(SERVER_CONFIG))
@@ -25,20 +25,20 @@ namespace GrabbingEye.ModelsSql
                     + "VALUES "
                     + "(@CompanyName, @RaportYear, @AktywaTrwale, @AktywaObrotowe, @AktywaRazem, @KapitalWlasnyAkcjonariuszyJednostkiDominujacej, @UdzialyNiekontrolujace, @ZobowiazaniaDlugoterminowe, @ZobowiazaniaKrotkoterminowe, @PasywaRazem)";
 
-                for (int i = 0; i < BalanceRaportList.Count; i++)
+                for (int i = 0; i < RaportList.Count; i++)
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@CompanyName", BalanceRaportList[i].ComapanyName);
-                        command.Parameters.AddWithValue("@RaportYear", BalanceRaportList[i].RaportYear);
-                        command.Parameters.AddWithValue("@AktywaTrwaley", BalanceRaportList[i].AktywaTrwale);
-                        command.Parameters.AddWithValue("@AktywaObrotowe", BalanceRaportList[i].AktywaObrotowe);
-                        command.Parameters.AddWithValue("@AktywaRazem", BalanceRaportList[i].AktywaRazem);
-                        command.Parameters.AddWithValue("@KapitalWlasnyAkcjonariuszyJednostkiDominujacej", BalanceRaportList[i].KapitalWlasnyAkcjonariuszyJednostkiDominujacej);
-                        command.Parameters.AddWithValue("@UdzialyNiekontrolujace", BalanceRaportList[i].UdzialyNiekontrolujace);
-                        command.Parameters.AddWithValue("@ZobowiazaniaDlugoterminowe", BalanceRaportList[i].ZobowiazaniaDlugoterminowe);
-                        command.Parameters.AddWithValue("@ZobowiazaniaKrotkoterminowe", BalanceRaportList[i].ZobowiazaniaKrotkoterminowe);
-                        command.Parameters.AddWithValue("@PasywaRazem", BalanceRaportList[i].PasywaRazem);
+                        command.Parameters.AddWithValue("@CompanyName", RaportList[i].Balance.ComapanyName);
+                        command.Parameters.AddWithValue("@RaportYear", RaportList[i].Balance.RaportYear);
+                        command.Parameters.AddWithValue("@AktywaTrwaley", RaportList[i].Balance.AktywaTrwale);
+                        command.Parameters.AddWithValue("@AktywaObrotowe", RaportList[i].Balance.AktywaObrotowe);
+                        command.Parameters.AddWithValue("@AktywaRazem", RaportList[i].Balance.AktywaRazem);
+                        command.Parameters.AddWithValue("@KapitalWlasnyAkcjonariuszyJednostkiDominujacej", RaportList[i].Balance.KapitalWlasnyAkcjonariuszyJednostkiDominujacej);
+                        command.Parameters.AddWithValue("@UdzialyNiekontrolujace", RaportList[i].Balance.UdzialyNiekontrolujace);
+                        command.Parameters.AddWithValue("@ZobowiazaniaDlugoterminowe", RaportList[i].Balance.ZobowiazaniaDlugoterminowe);
+                        command.Parameters.AddWithValue("@ZobowiazaniaKrotkoterminowe", RaportList[i].Balance.ZobowiazaniaKrotkoterminowe);
+                        command.Parameters.AddWithValue("@PasywaRazem", RaportList[i].Balance.PasywaRazem);
 
                         connection.Open();
 

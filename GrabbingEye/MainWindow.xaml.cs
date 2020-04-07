@@ -56,7 +56,7 @@ namespace GrabbingEye
         {
             ModelsSql.SqlAdapter SqlAdapt = new ModelsSql.SqlAdapter();
             ShowRaportOnScreen(SqlAdapt.GetRaport());
-            ListOfPolishCompanies = SqlAdapt.GetListOfCompanies();
+            ListOfPolishCompanies = SqlAdapt.GetCompaniesList();
         }
 
         // GET - data from biznesradar web

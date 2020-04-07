@@ -15,7 +15,7 @@ namespace GrabbingEye.ModelsSql
         #endregion
 
         // PUSH - financial balance data on server
-        public void PushFinanceProfitAndLoseRaport(List<FinanceProfitAndLose> ProfitAndLoseRaportList)
+        public void PushFinanceProfitAndLoseRaport(List<FinancialRaport> RaportList)
         {
             // code pushing data here
             using (SqlConnection connection = new SqlConnection(SERVER_CONFIG))
@@ -25,20 +25,20 @@ namespace GrabbingEye.ModelsSql
                     + "VALUES "
                     + "(@CompanyName, @RaportYear, @PrzychodyZeSprzedazy, @ZyskZeSprzedazy, @ZyskOperacyjny, @ZyskZDzialalnosciGospodarczej, @ZyskPrzedOpodatkowaniem, @ZyskNetto, @ZyskNettoAkcjonariuszyJednostkiDominujacej, @EBITDA)";
 
-                for (int i = 0; i < ProfitAndLoseRaportList.Count; i++)
+                for (int i = 0; i < RaportList.Count; i++)
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@CompanyName", ProfitAndLoseRaportList[i].ComapanyName);
-                        command.Parameters.AddWithValue("@RaportYear", ProfitAndLoseRaportList[i].RaportYear);
-                        command.Parameters.AddWithValue("@PrzychodyZeSprzedazy", ProfitAndLoseRaportList[i].PrzychodyZeSprzedazy);
-                        command.Parameters.AddWithValue("@ZyskZeSprzedazy", ProfitAndLoseRaportList[i].ZyskZeSprzedazy);
-                        command.Parameters.AddWithValue("@ZyskOperacyjny", ProfitAndLoseRaportList[i].ZyskOperacyjny);
-                        command.Parameters.AddWithValue("@ZyskZDzialalnosciGospodarczej", ProfitAndLoseRaportList[i].ZyskZDzialalnosciGospodarczej);
-                        command.Parameters.AddWithValue("@ZyskPrzedOpodatkowaniem", ProfitAndLoseRaportList[i].ZyskPrzedOpodatkowaniem);
-                        command.Parameters.AddWithValue("@ZyskNetto", ProfitAndLoseRaportList[i].ZyskNetto);
-                        command.Parameters.AddWithValue("@ZyskNettoAkcjonariuszyJednostkiDominujacej", ProfitAndLoseRaportList[i].ZyskNettoAkcjonariuszyJednostkiDominujacej);
-                        command.Parameters.AddWithValue("@EBITDA", ProfitAndLoseRaportList[i].EBITDA);
+                        command.Parameters.AddWithValue("@CompanyName", RaportList[i].ProfitAndLose.ComapanyName);
+                        command.Parameters.AddWithValue("@RaportYear", RaportList[i].ProfitAndLose.RaportYear);
+                        command.Parameters.AddWithValue("@PrzychodyZeSprzedazy", RaportList[i].ProfitAndLose.PrzychodyZeSprzedazy);
+                        command.Parameters.AddWithValue("@ZyskZeSprzedazy", RaportList[i].ProfitAndLose.ZyskZeSprzedazy);
+                        command.Parameters.AddWithValue("@ZyskOperacyjny", RaportList[i].ProfitAndLose.ZyskOperacyjny);
+                        command.Parameters.AddWithValue("@ZyskZDzialalnosciGospodarczej", RaportList[i].ProfitAndLose.ZyskZDzialalnosciGospodarczej);
+                        command.Parameters.AddWithValue("@ZyskPrzedOpodatkowaniem", RaportList[i].ProfitAndLose.ZyskPrzedOpodatkowaniem);
+                        command.Parameters.AddWithValue("@ZyskNetto", RaportList[i].ProfitAndLose.ZyskNetto);
+                        command.Parameters.AddWithValue("@ZyskNettoAkcjonariuszyJednostkiDominujacej", RaportList[i].ProfitAndLose.ZyskNettoAkcjonariuszyJednostkiDominujacej);
+                        command.Parameters.AddWithValue("@EBITDA", RaportList[i].ProfitAndLose.EBITDA);
 
                         connection.Open();
 

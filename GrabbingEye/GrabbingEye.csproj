@@ -89,6 +89,7 @@
     <Compile Include="ModelsFinance\StringTrimmer.cs" />
     <Compile Include="ModelsSql\SqlAdapterFinanceCashFlow.cs" />
     <Compile Include="ModelsSql\SqlAdapterFinanceProfitAndLose.cs" />
+    <Compile Include="ModelsSql\SqlAdapterLoadCompanies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
