@@ -13,8 +13,9 @@ namespace GrabbingEye.Models
 
         RaportConverter ConvertedRaport;
 
-        // Constructor
-        public DataSnifferBiznesradar(string StockName, int RaportByYear)
+
+        // Constructor #1 - multiple search purpose
+        public DataSnifferBiznesradar(int Id, string StockName, int RaportByYear)
         {
             int _raportTablePossition = 0;
             int _raportTableLenght = 0;
@@ -32,12 +33,45 @@ namespace GrabbingEye.Models
            
             if (_dataList.Count > 0)
             {
-                ConvertRaportToClassAndString(StockName, RaportByYear, _dataList, ref ConvertedRaport);
+                ConvertRaportToClassAndString(Id, StockName, RaportByYear, _dataList, ref ConvertedRaport);
             } else
             {
                 MessageBox.Show("Brak danych");
             }
         }
+
+
+        // construstor #2 - one search only
+        public DataSnifferBiznesradar(string StockName, int RaportByYear)
+        {
+            // dummy id !
+            int Id = 0;
+
+            int _raportTablePossition = 0;
+            int _raportTableLenght = 0;
+
+            string _StockName = StockName.ToUpper();
+
+
+            // list with all yearly finanancial data
+            List<int> _dataList = new List<int>();
+
+            GetTablePossitionAndLenght(URL_ZYSKI_STRATY + "" + _StockName, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
+            SniffForRaport(URL_ZYSKI_STRATY + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+            SniffForRaport(URL_BILANS + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+            SniffForRaport(URL_CASH_FLOW + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
+
+            if (_dataList.Count > 0)
+            {
+                ConvertRaportToClassAndString(Id, StockName, RaportByYear, _dataList, ref ConvertedRaport);
+            }
+            else
+            {
+                MessageBox.Show("Brak danych");
+            }
+        }
+
+
 
         /// <summary>
         /// Checking table possition and lenght of raport 
@@ -143,9 +177,9 @@ namespace GrabbingEye.Models
         /// </summary>
         /// <param name="dataList">list with grabbed data</param>
         /// <param name="convertedRaport">ref to class that converts raport to string and class</param>
-        private void ConvertRaportToClassAndString(string stockName, int raportYear,  List<int> dataList, ref RaportConverter convertedRaport)
+        private void ConvertRaportToClassAndString(int Id, string stockName, int raportYear,  List<int> dataList, ref RaportConverter convertedRaport)
         {
-            convertedRaport = new RaportConverter(stockName, raportYear, dataList);
+            convertedRaport = new RaportConverter(Id, stockName, raportYear, dataList);
         }
 
 

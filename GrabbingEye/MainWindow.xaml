@@ -16,5 +16,6 @@
         <Button x:Name="btGetAllComaniesFromSql" Content="Load Sql Companies" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Click="btGetAllCompaniesFromSql_Click" Margin="0,163,0,0"/>
         <TextBox x:Name="txtDownloadYear" HorizontalAlignment="Left" Height="23" Margin="0,188,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnGrabData" Content="Grab data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Click="btnGrabData_Click" Margin="0,216,0,0"/>
+        <Button x:Name="btnExportData" Content="Export to Sql" HorizontalAlignment="Left" Margin="0,241,0,0" VerticalAlignment="Top" Width="157" Click="btnExportData_Click" />
     </Grid>
 </Window>

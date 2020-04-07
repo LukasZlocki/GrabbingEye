@@ -9,20 +9,21 @@ namespace GrabbingEye.Models
 
         private string RaportAsString = "";
 
-        public RaportConverter(string StockName, int Year, List<int> RaportList)
+        public RaportConverter(int Id, string StockName, int Year, List<int> RaportList)
         {
-            ConvertToClass(StockName, Year, RaportList, ref FinancialRaport);
+            ConvertToClass(Id, StockName, Year, RaportList, ref FinancialRaport);
             ConvertToString(FinancialRaport, ref RaportAsString);
         }
 
 
         //   private void ConvertToClass(string stockName, int year,  List<int> dataList, ref YearlyFinancialRaportFull financialRaport)
-        private void ConvertToClass(string stockName, int year, List<int> dataList, ref FinancialRaport financialRaport)
+        private void ConvertToClass(int id, string stockName, int year, List<int> dataList, ref FinancialRaport financialRaport)
         {
             try
             {
                 if (dataList.Count > 0)
                 {
+                    financialRaport.Id = id;
                     financialRaport.ComapanyName = stockName;
                     financialRaport.RaportYear = year;
                     // Rachunek zyskow i strat

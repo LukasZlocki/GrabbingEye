@@ -1,4 +1,5 @@
 ﻿using GrabbingEye.Models;
+using GrabbingEye.ModelsSql;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -20,6 +21,14 @@ namespace GrabbingEye
         }
 
         #region Buttons
+
+        // SEND - data to Sql
+        private void btnExportData_Click(object sender, RoutedEventArgs e)
+        {
+            // ToDo : code connection here
+            SqlAdapter SqlAdapter = new SqlAdapter();
+            SqlAdapter.SaveFinancialDataOnSqlServer(ListOfYearlyRaports);
+        }
 
         // GET financial raport basis on _stockName and _raportYear and www
         private void btnextract_Click(object sender, RoutedEventArgs e)
@@ -65,7 +74,8 @@ namespace GrabbingEye
             int _counterALL = 0;
 
             // ToDo : code loops to gather data
-            for (int i = 0; i < listOfPolishCompanies.Count; i++)
+            // for (int i = 0; i < listOfPolishCompanies.Count; i++)
+            for (int i = 0; i < 5; i++)
             {
                 if (isGrabberReady(listOfPolishCompanies[i].Name))
                 {
@@ -166,9 +176,9 @@ namespace GrabbingEye
         {
             txtBox.Text = "" + raport;
         }
-     
-        #endregion
 
+
+        #endregion
 
     }
 }

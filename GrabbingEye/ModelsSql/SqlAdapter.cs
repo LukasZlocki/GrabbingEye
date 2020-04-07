@@ -16,7 +16,7 @@ namespace GrabbingEye.ModelsSql
 
         // constr
         public SqlAdapter()
-        {         
+        {
             LoadPolishCompanies(ref ListOfPolishCompanies);
         }
 
@@ -55,7 +55,7 @@ namespace GrabbingEye.ModelsSql
 
             companyList.Add(company);
 
-           // Console.WriteLine(String.Format("{0}, {1}, {2}, {3}, {4}", record[0], record[1], record[2], record[3], record[4]));            
+            // Console.WriteLine(String.Format("{0}, {1}, {2}, {3}, {4}", record[0], record[1], record[2], record[3], record[4]));            
         }
 
         // GET - raport
@@ -73,6 +73,48 @@ namespace GrabbingEye.ModelsSql
         public List<PolishCompany> GetListOfCompanies()
         {
             return (this.ListOfPolishCompanies);
+        }
+
+
+        //SAVE - Financial data to Sql
+        public void SaveFinancialDataOnSqlServer(List<FinancialRaport> FinancialRaportsList)
+        {
+            using (SqlConnection connection = new SqlConnection(SERVER_CONFIG))
+            {
+                String query = "INSERT INTO dbo.FinancialData (CompanyName,RaportYear,PrzychodyZeSprzedazy,ZyskZeSprzedazy,ZyskOperacyjny,ZyskZDzialalnosciGospodarczej,ZyskPrzedOpodatkowaniem,ZyskNetto,ZyskNettoAkcjonariuszyJednostkiDominujacej,EBITDA) "
+                    + "VALUES "
+                    + "(@CompanyName, @RaportYear, @PrzychodyZeSprzedazy, @ZyskZeSprzedazy, @ZyskOperacyjny, @ZyskZDzialalnosciGospodarczej, @ZyskPrzedOpodatkowaniem, @ZyskNetto, @ZyskNettoAkcjonariuszyJednostkiDominujacej, @EBITDA)";
+
+                for (int i = 0; i < FinancialRaportsList.Count; i++)
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                    
+                        command.Parameters.AddWithValue("@CompanyName", FinancialRaportsList[i].ComapanyName);
+                        command.Parameters.AddWithValue("@RaportYear", FinancialRaportsList[i].RaportYear);
+                        command.Parameters.AddWithValue("@PrzychodyZeSprzedazy", FinancialRaportsList[i].ProfitAndLose.PrzychodyZeSprzedazy);
+                        command.Parameters.AddWithValue("@ZyskZeSprzedazy", FinancialRaportsList[i].ProfitAndLose.ZyskZeSprzedazy);
+                        command.Parameters.AddWithValue("@ZyskOperacyjny", FinancialRaportsList[i].ProfitAndLose.ZyskOperacyjny);
+                        command.Parameters.AddWithValue("@ZyskZDzialalnosciGospodarczej", FinancialRaportsList[i].ProfitAndLose.ZyskZDzialalnosciGospodarczej);
+                        command.Parameters.AddWithValue("@ZyskPrzedOpodatkowaniem", FinancialRaportsList[i].ProfitAndLose.ZyskPrzedOpodatkowaniem);
+                        command.Parameters.AddWithValue("@ZyskNetto", FinancialRaportsList[i].ProfitAndLose.ZyskNetto);
+                        command.Parameters.AddWithValue("@ZyskNettoAkcjonariuszyJednostkiDominujacej", FinancialRaportsList[i].ProfitAndLose.ZyskNettoAkcjonariuszyJednostkiDominujacej);
+                        command.Parameters.AddWithValue("@EBITDA", FinancialRaportsList[i].ProfitAndLose.EBITDA);
+
+                        connection.Open();
+                        
+                        int result = command.ExecuteNonQuery();
+                        connection.Close();
+                        // Check Error
+                        if (result < 0)
+                            Console.WriteLine("Error inserting data into Database!");
+                        if (result == 1 )
+                        {
+                            Console.WriteLine("Sql Upload complete!");
+                        }
+                    }
+                }
+            }
         }
 
     }
