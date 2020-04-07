@@ -2,7 +2,6 @@
 {
     class FinancialRaport : IFinancialRaport
     {
-        public int Id { get; set; }
         public string ComapanyName { get; set; }
         public int RaportYear { get; set; }
 

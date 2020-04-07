@@ -2,6 +2,9 @@
 {
     class FinanceProfitAndLose
     {
+        public string ComapanyName { get; set; }
+        public int RaportYear { get; set; }
+
         #region Rachunek zyskow i strat
         public int PrzychodyZeSprzedazy { get; set; }
         public int ZyskZeSprzedazy { get; set; }

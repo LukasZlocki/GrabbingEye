@@ -2,6 +2,9 @@
 {
     class FinanceBalance
     {
+        public string ComapanyName { get; set; }
+        public int RaportYear { get; set; }
+
         #region Bilans
         public int AktywaTrwale { get; set; }
         public int AktywaObrotowe { get; set; }

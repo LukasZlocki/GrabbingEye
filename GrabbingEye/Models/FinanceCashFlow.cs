@@ -2,6 +2,9 @@
 {
     class FinanceCashFlow
     {
+        public string ComapanyName { get; set; }
+        public int RaportYear { get; set; }
+
         #region Cash Flow
         public int PrzeplywyZDzialalnosciOperacyjnej { get; set; }
         public int PrzeplywyZDzialalnosciInvestycyjnej { get; set; }
