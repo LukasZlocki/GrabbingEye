@@ -14,6 +14,12 @@ namespace GrabbingEye.ModelsSql
 
         List<PolishCompany> ListOfPolishCompanies = new List<PolishCompany>();
 
+        // constructor
+        public SqlAdapterCompanies()
+        {
+            LoadPolishCompanies(ref ListOfPolishCompanies);
+        }
+
         // GET - all companies (polish stocks)
         #region GET - all companies to list from Sql server
         private void LoadPolishCompanies(ref List<PolishCompany> listOfPolishCompanies)

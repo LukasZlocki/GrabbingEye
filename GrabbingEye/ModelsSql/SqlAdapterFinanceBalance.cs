@@ -31,7 +31,7 @@ namespace GrabbingEye.ModelsSql
                     {
                         command.Parameters.AddWithValue("@CompanyName", RaportList[i].Balance.ComapanyName);
                         command.Parameters.AddWithValue("@RaportYear", RaportList[i].Balance.RaportYear);
-                        command.Parameters.AddWithValue("@AktywaTrwaley", RaportList[i].Balance.AktywaTrwale);
+                        command.Parameters.AddWithValue("@AktywaTrwale", RaportList[i].Balance.AktywaTrwale);
                         command.Parameters.AddWithValue("@AktywaObrotowe", RaportList[i].Balance.AktywaObrotowe);
                         command.Parameters.AddWithValue("@AktywaRazem", RaportList[i].Balance.AktywaRazem);
                         command.Parameters.AddWithValue("@KapitalWlasnyAkcjonariuszyJednostkiDominujacej", RaportList[i].Balance.KapitalWlasnyAkcjonariuszyJednostkiDominujacej);

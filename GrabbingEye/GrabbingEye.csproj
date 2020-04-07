@@ -74,6 +74,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelsSql\ISqlAdapter.cs" />
     <Compile Include="ModelsSql\ISqlRaportAdapter.cs" />
     <Compile Include="ModelsSql\SqlAdapter.cs" />
     <Compile Include="ModelsSql\SqlAdapterFinanceBalance.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="ModelsFinance\StringTrimmer.cs" />
     <Compile Include="ModelsSql\SqlAdapterFinanceCashFlow.cs" />
     <Compile Include="ModelsSql\SqlAdapterFinanceProfitAndLose.cs" />
-    <Compile Include="ModelsSql\SqlAdapterLoadCompanies.cs" />
+    <Compile Include="ModelsSql\SqlAdapterCompanies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

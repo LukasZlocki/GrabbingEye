@@ -27,6 +27,8 @@ namespace GrabbingEye.Models
                     financialRaport.ComapanyName = stockName;
                     financialRaport.RaportYear = year;
                     // Rachunek zyskow i strat
+                    financialRaport.ProfitAndLose.ComapanyName = stockName;
+                    financialRaport.ProfitAndLose.RaportYear = year;
                     financialRaport.ProfitAndLose.PrzychodyZeSprzedazy = dataList[0];
                     financialRaport.ProfitAndLose.ZyskZeSprzedazy = dataList[1];
                     financialRaport.ProfitAndLose.ZyskOperacyjny = dataList[2];
@@ -36,6 +38,8 @@ namespace GrabbingEye.Models
                     financialRaport.ProfitAndLose.ZyskNettoAkcjonariuszyJednostkiDominujacej = dataList[6];
                     financialRaport.ProfitAndLose.EBITDA = dataList[7];
                     // Bilans
+                    financialRaport.Balance.ComapanyName = stockName;
+                    financialRaport.Balance.RaportYear = year;
                     financialRaport.Balance.AktywaTrwale = dataList[8];
                     financialRaport.Balance.AktywaObrotowe = dataList[9];
                     financialRaport.Balance.AktywaRazem = financialRaport.Balance.AktywaTrwale + financialRaport.Balance.AktywaObrotowe;
@@ -45,6 +49,8 @@ namespace GrabbingEye.Models
                     financialRaport.Balance.ZobowiazaniaKrotkoterminowe = dataList[13];
                     financialRaport.Balance.PasywaRazem = financialRaport.Balance.KapitalWlasnyAkcjonariuszyJednostkiDominujacej + financialRaport.Balance.UdzialyNiekontrolujace + financialRaport.Balance.ZobowiazaniaDlugoterminowe + financialRaport.Balance.ZobowiazaniaKrotkoterminowe;
                     // Cash Flow
+                    financialRaport.CashFlow.ComapanyName = stockName;
+                    financialRaport.CashFlow.RaportYear = year;
                     financialRaport.CashFlow.PrzeplywyZDzialalnosciOperacyjnej = dataList[14];
                     financialRaport.CashFlow.PrzeplywyZDzialalnosciInvestycyjnej = dataList[15];
                     financialRaport.CashFlow.PrzeplywyZDzialalnosciFinansowej = dataList[16];

@@ -54,9 +54,10 @@ namespace GrabbingEye
         // GET all companies from Sql and store them in StockPolishcompany list
         private void btGetAllCompaniesFromSql_Click(object sender, RoutedEventArgs e)
         {
-            ModelsSql.SqlAdapter SqlAdapt = new ModelsSql.SqlAdapter();
-            ShowRaportOnScreen(SqlAdapt.GetRaport());
+            SqlAdapter SqlAdapt = new SqlAdapter();
             ListOfPolishCompanies = SqlAdapt.GetCompaniesList();
+            ShowRaportOnScreen(SqlAdapt.GetRaport());
+
         }
 
         // GET - data from biznesradar web
