@@ -63,23 +63,24 @@ namespace GrabbingEye
         // GET - data from biznesradar web
         private void btnGrabData_Click(object sender, RoutedEventArgs e)
         {
-            int _year = Convert.ToInt32(txtDownloadYear.Text);
-            MassiveDataGrabing(ListOfPolishCompanies, ref ListOfYearlyRaports, _year);
+            int _minYear = Convert.ToInt32(txtMinYear.Text);
+            int _maxYear = Convert.ToInt32(txtMaxYear.Text);
+            MassiveDataGrabing(ListOfPolishCompanies, ref ListOfYearlyRaports, _minYear, _maxYear);
         }
 
         #region Massive Grabbing
 
-        private void MassiveDataGrabing(List<PolishCompany> listOfPolishCompanies, ref List<FinancialRaport> listOfYearlyFinancialRaports, int year)
+        private void MassiveDataGrabing(List<PolishCompany> listOfPolishCompanies, ref List<FinancialRaport> listOfYearlyFinancialRaports, int minYear, int maxYear)
         {
             int _counterOK = 0;
             int _counterALL = 0;
 
             // ToDo : code loops to gather data
             //   for (int i = 0; i < listOfPolishCompanies.Count; i++)
-            for (int j = 2000; j < 2009; j++)
+            for (int j = minYear; j < maxYear+1; j++)
             {
-                // to skasowac
-                year = j;
+
+                int year = j;
                 for (int i = 0; i < 5; i++)
                 {
                     DataSnifferBiznesradar sniff = new DataSnifferBiznesradar(listOfPolishCompanies[i].Name, year);
