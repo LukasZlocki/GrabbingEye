@@ -14,41 +14,14 @@ namespace GrabbingEye.Models
         RaportConverter ConvertedRaport;
 
 
-        // Constructor #1 - multiple search purpose
-        public DataSnifferBiznesradar(int Id, string StockName, int RaportByYear)
-        {
-            int _raportTablePossition = 0;
-            int _raportTableLenght = 0;
-
-            string _StockName = StockName.ToUpper();
-
-
-            // list with all yearly finanancial data
-            List<int> _dataList = new List<int>();          
-
-            GetTablePossitionAndLenght(URL_ZYSKI_STRATY + "" + _StockName, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
-            SniffForRaport(URL_ZYSKI_STRATY + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
-            SniffForRaport(URL_BILANS + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
-            SniffForRaport(URL_CASH_FLOW + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
-           
-            if (_dataList.Count > 0)
-            {
-                ConvertRaportToClassAndString(Id, StockName, RaportByYear, _dataList, ref ConvertedRaport);
-            } else
-            {
-                MessageBox.Show("Brak danych");
-            }
-        }
-
-
-        // construstor #2 - one search only
+        // construstor - one search only
         public DataSnifferBiznesradar(string StockName, int RaportByYear)
         {
             // dummy id !
             int Id = 0;
 
-            int _raportTablePossition = 0;
-            int _raportTableLenght = 0;
+            int _raportTablePossition = -1;
+            int _raportTableLenght = -1;
 
             string _StockName = StockName.ToUpper();
 
@@ -57,6 +30,7 @@ namespace GrabbingEye.Models
             List<int> _dataList = new List<int>();
 
             GetTablePossitionAndLenght(URL_ZYSKI_STRATY + "" + _StockName, RaportByYear, ref _raportTablePossition, ref _raportTableLenght);
+
             SniffForRaport(URL_ZYSKI_STRATY + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
             SniffForRaport(URL_BILANS + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
             SniffForRaport(URL_CASH_FLOW + "" + _StockName, _raportTablePossition, _raportTableLenght, ref _dataList);
@@ -67,7 +41,7 @@ namespace GrabbingEye.Models
             }
             else
             {
-                MessageBox.Show("Brak danych");
+              //  MessageBox.Show("Brak danych");
             }
         }
 
@@ -119,7 +93,7 @@ namespace GrabbingEye.Models
             }
             catch
             {
-                MessageBox.Show("Nie ma takiej spolki");
+             //   MessageBox.Show("Nie ma takiej spolki");
             }
         }
 
@@ -168,7 +142,7 @@ namespace GrabbingEye.Models
             }
             catch
             {
-                MessageBox.Show("Brak danych dla tej spolki");
+              //  MessageBox.Show("Brak danych dla tej spolki");
             }
         }
 
@@ -188,12 +162,30 @@ namespace GrabbingEye.Models
         // GET - Raport
         public string GetFullYearlyRaportAsString()
         {
-          return (this.ConvertedRaport.GetFinancialRaportAsString());
+            try
+            {
+                return (this.ConvertedRaport.GetFinancialRaportAsString());
+            }
+            catch
+            {
+              //  MessageBox.Show("Brak danych - nie przesylam raportu string");
+            }
+            return ("");
         }
 
         public FinancialRaport GetFullYearRaportAsClass()
         {
-            return (this.ConvertedRaport.GetFinancialRaportAsClass());
+            FinancialRaport raport = new FinancialRaport();
+
+            try
+            {
+                return (this.ConvertedRaport.GetFinancialRaportAsClass());
+            }
+            catch
+            {
+             //   MessageBox.Show("Brak danych - nie przesylam raportu do listy");
+            }
+            return (raport = null);
         }
 
         #endregion

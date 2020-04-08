@@ -75,23 +75,34 @@ namespace GrabbingEye
             int _counterALL = 0;
 
             // ToDo : code loops to gather data
-            // for (int i = 0; i < listOfPolishCompanies.Count; i++)
-            for (int i = 0; i < 5; i++)
+            //   for (int i = 0; i < listOfPolishCompanies.Count; i++)
+            for (int j = 2000; j < 2009; j++)
             {
-                if (isGrabberReady(listOfPolishCompanies[i].Name))
+                // to skasowac
+                year = j;
+                for (int i = 0; i < 5; i++)
                 {
                     DataSnifferBiznesradar sniff = new DataSnifferBiznesradar(listOfPolishCompanies[i].Name, year);
-                    listOfYearlyFinancialRaports.Add(sniff.GetFullYearRaportAsClass());
-                    _counterOK++;
-                    Thread.Sleep(3000);
+
+                    // check if dat exist before inserting to list
+                    if (!(sniff.GetFullYearRaportAsClass() == null))
+                    {
+                        if (isGrabberReady(listOfPolishCompanies[i].Name))
+                        {
+                            listOfYearlyFinancialRaports.Add(sniff.GetFullYearRaportAsClass());
+                            _counterOK++;
+                            Thread.Sleep(3000);
+                        }
+
+                    }
+                    else
+                    {
+                     //   MessageBox.Show("Brak raportu na stonie WWWW");
+                    }
+                    _counterALL++;
                 }
-                else
-                {
-                    // Do nothing
-                }
-                _counterALL++;
+                ShowRaportOnScreen("ALL : " + _counterALL + ", OK : " + _counterOK + " Rok : " + j);
             }
-            ShowRaportOnScreen("ALL : " + _counterALL + ", OK : " + _counterOK);
         }
 
         /// <summary>

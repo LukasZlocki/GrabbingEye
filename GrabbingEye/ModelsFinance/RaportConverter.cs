@@ -63,7 +63,7 @@ namespace GrabbingEye.Models
             }
             catch
             {
-                MessageBox.Show(" blad : " + stockName);
+              //  MessageBox.Show(" blad : " + stockName); <<--- chwilowo usuwam komentaz z tego bledu
             }
         }
 
